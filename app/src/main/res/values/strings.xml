@@ -35,17 +35,17 @@
     <string name="earn_daily_earn">DAILY EARN</string>
     <string name="earn_daily_earn_credits">+20 credits</string>
 
-    <string name="winner_winner">%1$s Winner:</string>
-    <string name="winner_winner_price">$%1$s</string>
-    <string name="winner_sec_price">Second prize: $%1$s/each</string>
-    <string name="winner_history">HISTORY</string>
-    <string name="winner_buttom">We will inform the winner via facebook massenger.</string>
+    <string name="winner_winner">%1$s Top prize winner:</string>
+    <string name="winner_winner_price">2,310</string>
+    <string name="winner_sec_price">Second prize: $%1$s /each</string>
+    <string name="winner_history">History</string>
+    <string name="winner_buttom_msg">We will inform the winner via facebook massenger.</string>
 
     <string name="setting_fb_gusee">Guess</string>
     <string name="setting_fb_login">Login</string>
-    <string name="setting_how_it_work">How It Works</string>
+    <string name="setting_how_it_work">How it works</string>
     <string name="setting_tour">Tour</string>
-    <string name="setting_help">Help</string>
+    <string name="setting_contact">Contact us</string>
     <string name="setting_fb_fan_page">FB fanpage</string>
     <string name="setting_logout">Log out</string>
 

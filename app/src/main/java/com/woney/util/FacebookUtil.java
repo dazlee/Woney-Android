@@ -1,6 +1,5 @@
 package com.woney.util;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,7 +9,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
-import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -51,6 +49,7 @@ public class FacebookUtil {
             accessToken = loginResult.getAccessToken();
 
             Log.d("FB", "Access success");
+            // TBD refresh fragment
             /*
             GraphRequest request = GraphRequest.newMeRequest(
                     accessToken,

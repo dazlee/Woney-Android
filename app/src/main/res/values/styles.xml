@@ -30,25 +30,16 @@
     </style>
 
     <style name="EarnLuckyDrawStyle">
-        <item name="android:textSize">@dimen/earn_top_btn_luk</item>
+        <item name="android:textSize">@dimen/woney_textsize_20</item>
         <item name="android:textColor">@color/woney_black</item>
-    </style>
-
-    <style name="Setting_Login_Btn">
-        <item name="android:text">@string/setting_fb_login</item>
-        <item name="android:textSize">@dimen/setting_fb_btn_textsize</item>
-        <item name="android:background">@color/com_facebook_button_background_color</item>
-        <item name="android:textColor">@color/com_facebook_button_border_color_focused</item>
-        <item name="android:textStyle">normal|bold</item>
-        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
     <style name="EarnOptText">
         <item name="android:textColor">@color/woney_black</item>
-        <item name="android:textSize">12.5sp</item>
+        <item name="android:textSize">@dimen/woney_textsize_12_5</item>
     </style>
     <style name="EarnOptCreditsText">
         <item name="android:textColor">@color/woney_gray</item>
-        <item name="android:textSize">12.5sp</item>
+        <item name="android:textSize">@dimen/woney_textsize_10</item>
     </style>
 </resources>

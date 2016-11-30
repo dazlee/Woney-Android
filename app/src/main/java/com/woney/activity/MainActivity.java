@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
-import com.facebook.login.widget.LoginButton;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.ads.AdRequest;
 import com.tapjoy.TJPlacement;
 import com.tapjoy.Tapjoy;
@@ -20,6 +20,8 @@ import com.woney.fragment.EarnSettingFragment;
 import com.woney.fragment.EarnWinnerFragment;
 import com.woney.util.FacebookUtil;
 import com.woney.util.TapjoyUtil;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     CallbackManager callbackManager;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_main);
+        LoginManager.getInstance().registerCallback(callbackManager, FacebookUtil.facebookCallback);
 
         initScreen();
 
@@ -86,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToShare(View view) {
-        //startActivity(new Intent(MainActivity.this, MainActivity.class));
     }
 
     public void goToDaily(View view) {
@@ -98,8 +100,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fbLogin(View view) {
-        LoginButton loginButton = (LoginButton) view.findViewById(R.id.setting_fb_login);
-        loginButton.registerCallback(callbackManager, FacebookUtil.facebookCallback);
+        //Button loginButton = (Button) view.findViewById(R.id.setting_fb_login);
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+    }
+
+    public void fbLogout(View view) {
+        LoginManager.getInstance().logOut();
     }
 
     @Override

@@ -31,7 +31,6 @@ public class EarnMainFragment extends Fragment {
         float scale = ScreenUtil.getScale(getActivity().getApplicationContext());
 
         TextView textEarnPrice = (TextView) view.findViewById(R.id.earn_top_price);
-        float textSize = getResources().getDimension(R.dimen.earn_top_price);
         //textEarnPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize * scale);
     }
 }

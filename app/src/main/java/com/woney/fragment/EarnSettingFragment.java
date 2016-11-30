@@ -5,11 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.login.widget.ProfilePictureView;
 import com.woney.R;
 import com.woney.util.FacebookUtil;
-import com.woney.view.ProfilePictureView;
 
 public class EarnSettingFragment extends Fragment {
 
@@ -36,6 +37,9 @@ public class EarnSettingFragment extends Fragment {
 
             ProfilePictureView pic = (ProfilePictureView) view.findViewById(R.id.setting_fb_img);
             pic.setProfileId(FacebookUtil.getId());
+
+            LinearLayout loginArea = (LinearLayout) view.findViewById(R.id.setting_fb_login_layout);
+            loginArea.setVisibility(View.GONE);
         }
     }
 }

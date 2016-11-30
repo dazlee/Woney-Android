@@ -10,12 +10,9 @@
     
     <dimen name="main_top_woney_credits">20sp</dimen>
     
-    <dimen name="earn_top_prize">17.5sp</dimen>
-    <dimen name="earn_top_price">50sp</dimen>
-    <dimen name="earn_top_draw">12.5sp</dimen>
-    <dimen name="earn_top_btn_luk">20sp</dimen>
-    <dimen name="earn_top_btn_woneybet">10sp</dimen>
-    <dimen name="earn_top_btn_lky_h">46dp</dimen>
-    <dimen name="earn_top_btn_lky_w">190dp</dimen>
-    <dimen name="earn_opt_text">12.5sp</dimen>
+    <dimen name="woney_textsize_10">10sp</dimen>
+    <dimen name="woney_textsize_12_5">12.5sp</dimen>
+    <dimen name="woney_textsize_17_5">17.5sp</dimen>
+    <dimen name="woney_textsize_20">20sp</dimen>
+    <dimen name="woney_textsize_57">57sp</dimen>
 </resources>
