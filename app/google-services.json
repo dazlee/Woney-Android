@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "376541481994",
+    "firebase_url": "https://woney-d7cff.firebaseio.com",
+    "project_id": "woney-d7cff",
+    "storage_bucket": "woney-d7cff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376541481994:android:de7adfb573c32c75",
+        "android_client_info": {
+          "package_name": "com.woney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376541481994-v5upa4f1u80hf1d57eb7uomjc3l6sa44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlEl-ZJW84k6LWwTSuS4Ur7ozIXBnjcgM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

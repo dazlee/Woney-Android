@@ -1,0 +1,119 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:background="@drawable/bg_setting"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:weightSum="4"
+        android:orientation="horizontal">
+
+        <com.woney.view.ProfilePictureView
+            android:id="@+id/setting_fb_img"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:weightSum="5"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/setting_fb_name"
+                android:text="@string/setting_fb_gusee"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:gravity="bottom|right"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+
+            <com.facebook.login.widget.LoginButton
+                xmlns:fb="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/setting_fb_login"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_margin="0dp"
+                fb:theme="@style/Setting_Login_Btn"
+                android:onClick="fbLogin"
+                android:textSize="@dimen/setting_fb_btn_textsize">
+
+            </com.facebook.login.widget.LoginButton>
+            <Button
+                android:id="@+id/setting_fb_login_btn"
+                android:text="@string/setting_fb_login"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_margin="0dp"
+                android:onClick="fbLogin"
+                android:textSize="@dimen/setting_fb_btn_textsize"
+                android:background="@color/com_facebook_button_background_color"
+                android:textColor="@color/com_facebook_button_border_color_focused"
+                android:textStyle="normal|bold"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:gravity="top|left"
+        android:padding="15dp"
+        android:orientation="vertical">
+        
+        <TextView
+            android:text="@string/setting_how_it_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+
+        <TextView
+            android:text="@string/setting_tour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="goToTour"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+
+        <TextView
+            android:text="@string/setting_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+
+        <TextView
+            android:text="@string/setting_fb_fan_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+
+        <TextView
+            android:text="@string/setting_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+    </LinearLayout>
+</LinearLayout>

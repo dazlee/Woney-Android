@@ -1,0 +1,248 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="31.25">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11.4"
+        android:weightSum="6"
+        android:background="@drawable/bg_luckydraw">
+
+        <TextView
+            android:id="@+id/earn_top_prize"
+            android:text="@string/earn_top_paypal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginLeft="85dp"
+            android:textSize="@dimen/earn_top_prize"
+            />
+
+        <TextView
+            android:id="@+id/earn_top_price"
+            android:text="2,310"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal"
+            android:gravity="top"
+            android:textSize="@dimen/earn_top_price"
+            />
+
+        <TextView
+            android:id="@+id/earn_top_draw"
+            android:text="@string/earn_top_draw"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:layout_marginLeft="85dp"
+            android:textSize="@dimen/earn_top_draw"
+            android:textColor="@color/woney_black"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:layout_marginLeft="85dp"
+            >
+
+            <Button
+                android:id="@+id/earn_bet_btn"
+                android:text="@string/earn_top_btn_luk"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textColor="@color/woney_black"
+                android:background="@drawable/btn_luckydraw"
+                />
+
+            <TextView
+                android:id="@+id/earn_top_woneybet"
+                android:text="@string/earn_top_woneybet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginLeft="8dp"
+                android:textSize="@dimen/earn_top_btn_woneybet"
+                android:textColor="@color/woney_black"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:weightSum="2"
+        android:background="@color/woney_white">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:onClick="goToWall"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="center_horizontal|bottom">
+                <ImageView
+                    android:id="@+id/earn_wall_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/btn_offerwall" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/earn_offer_wall_text"
+                android:text="@string/earn_offer_wall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                style="@style/EarnOptText"
+                />
+            <TextView
+                android:id="@+id/earn_offer_wall_credits"
+                android:text="@string/earn_offer_wall_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EarnOptCreditsText"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:onClick="goToWatch"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="center_horizontal|bottom">
+                <ImageView
+                    android:id="@+id/earn_watch_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/btn_watch_ads" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/earn_watch_text"
+                android:text="@string/earn_watch_ads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                style="@style/EarnOptText"
+                />
+            <TextView
+                android:id="@+id/earn_watch_credits"
+                android:text="@string/earn_watch_ads_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EarnOptCreditsText"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11.85"
+        android:weightSum="2"
+        android:background="@color/woney_white">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:onClick="goToShare"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="center_horizontal|bottom">
+                <ImageView
+                    android:id="@+id/earn_share_img"
+                    android:layout_width="41.5dp"
+                    android:layout_height="26.5dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/btn_fb_share" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/earn_share_text"
+                android:text="@string/earn_fb_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                style="@style/EarnOptText"
+                />
+            <TextView
+                android:id="@+id/earn_share_credits"
+                android:text="@string/earn_fb_share_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EarnOptCreditsText"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:onClick="goToDaily"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="center_horizontal|bottom">
+                <ImageView
+                    android:id="@+id/earn_daily_img"
+                    android:layout_width="33.5dp"
+                    android:layout_height="33.5dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/btn_daily_earn" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/earn_daily_text"
+                android:text="@string/earn_daily_earn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                style="@style/EarnOptText"
+                />
+            <TextView
+                android:id="@+id/earn_daily_credits"
+                android:text="@string/earn_daily_earn_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EarnOptCreditsText"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
