@@ -29,7 +29,8 @@
             android:layout_weight="2"
             android:layout_gravity="center_vertical|left"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/logo_"/>
+            android:src="@drawable/logo_"
+            />
         <TextView
             android:id="@+id/text_woney_credits"
             android:layout_width="0dp"

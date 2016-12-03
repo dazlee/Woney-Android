@@ -63,6 +63,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/woney_black"
                 android:background="@drawable/btn_luckydraw"
+                android:onClick="clickDraw"
                 />
 
             <TextView
@@ -92,7 +93,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:onClick="goToWall"
+            android:onClick="clickWall"
             android:orientation="vertical">
 
             <LinearLayout
@@ -129,7 +130,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:onClick="goToWatch"
+            android:onClick="clickWatch"
             android:orientation="vertical">
 
             <LinearLayout
@@ -175,7 +176,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:onClick="goToShare"
+            android:onClick="clickFbShare"
             android:orientation="vertical">
 
             <LinearLayout
@@ -212,7 +213,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:onClick="goToDaily"
+            android:onClick="clickDailyEarn"
             android:orientation="vertical">
 
             <LinearLayout

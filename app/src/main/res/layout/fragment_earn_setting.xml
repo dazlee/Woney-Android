@@ -71,7 +71,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginLeft="32dp"
-        android:onClick="goToTour"
+        android:onClick="clickTour"
         android:textSize="@dimen/woney_textsize_20"
         />
 

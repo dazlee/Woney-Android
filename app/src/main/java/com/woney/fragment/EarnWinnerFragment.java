@@ -21,6 +21,8 @@ public class EarnWinnerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_earn_winner, container, false);
+        View view = inflater.inflate(R.layout.fragment_earn_winner, container, false);
+        view.setTag(R.string.main_tab_winner);
+        return view;
     }
 }

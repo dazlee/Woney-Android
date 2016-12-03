@@ -25,7 +25,7 @@
 
     <style name="ButtomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">12.5sp</item>
+        <item name="android:textSize">@dimen/woney_textsize_12_5</item>
         <item name="android:textColor">@color/woney_white</item>
     </style>
 

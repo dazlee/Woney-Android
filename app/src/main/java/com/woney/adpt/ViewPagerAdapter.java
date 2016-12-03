@@ -3,12 +3,13 @@ package com.woney.adpt;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by houan on 2016/11/19.
+ * Created by houan on 2016/12/2.
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -37,5 +38,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        return super.instantiateItem(container, position);
     }
 }

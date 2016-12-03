@@ -14,6 +14,7 @@
 
     <string name="title_activity_facebook">FacebookActivity</string>
 
+    <string name="main_tab_key">tag_key</string>
     <string name="main_tab_main">Earn/Bet</string>
     <string name="main_tab_winner">Winner</string>
     <string name="main_tab_setting">Setting</string>
@@ -39,7 +40,7 @@
     <string name="winner_winner_price">2,310</string>
     <string name="winner_sec_price">Second prize: $%1$s /each</string>
     <string name="winner_history">History</string>
-    <string name="winner_buttom_msg">We will inform the winner via facebook massenger.</string>
+    <string name="winner_buttom_msg">We will inform the winner via facebook messenger.</string>
 
     <string name="setting_fb_gusee">Guess</string>
     <string name="setting_fb_login">Login</string>
@@ -49,4 +50,7 @@
     <string name="setting_fb_fan_page">FB fanpage</string>
     <string name="setting_logout">Log out</string>
 
+    <string name="alert_fb_logout">Logout your facebook?</string>
+    <string name="alert_fb_logout_btn_true">Logout</string>
+    <string name="alert_fb_logout_btn_false">Cancel</string>
 </resources>

@@ -2,7 +2,6 @@ package com.woney.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,18 +13,24 @@ import com.tapjoy.TJPlacement;
 import com.tapjoy.TJPlacementListener;
 import com.tapjoy.Tapjoy;
 import com.woney.R;
-import com.woney.util.ScreenUtil;
 import com.woney.util.SystemUtil;
 import com.woney.util.TapjoyUtil;
 
 import java.util.Hashtable;
 
 public class HomeActivity extends AppCompatActivity implements TJConnectListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_home);
+
+        initView();
+
+        initTapjoy();
+    }
+
+    private void initView() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -33,19 +38,6 @@ public class HomeActivity extends AppCompatActivity implements TJConnectListener
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
-
-        setContentView(R.layout.activity_home);
-
-        initTapjoy();
-    }
-
-    private void changeActivity() {
-        if (SystemUtil.isFirstStarted(getBaseContext())) {
-            startActivity(new Intent(HomeActivity.this, TourActivity.class));
-        } else {
-            startActivity(new Intent(HomeActivity.this, MainActivity.class));
-        }
-        finish();
     }
 
     private void initTapjoy() {
@@ -55,6 +47,15 @@ public class HomeActivity extends AppCompatActivity implements TJConnectListener
                 hashtable, this);
 
         Tapjoy.setDebugEnabled(true);
+    }
+
+    private void changeActivity() {
+        if (SystemUtil.isFirstStarted(getBaseContext())) {
+            startActivity(new Intent(HomeActivity.this, TourActivity.class));
+        } else {
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
+        }
+        finish();
     }
 
     private void requiredPlacements() {
