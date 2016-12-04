@@ -5,6 +5,15 @@
 
     <string name="sys_is_first">FIRST_TIME_START</string>
 
+    <string name="user_facebook_id">USER_FACEBOOK_ID</string>
+    <string name="user_first_name">USER_FIRST_NAME</string>
+    <string name="user_middle_name">USER_MIDDLE_NAME</string>
+    <string name="user_last_name">USER_LAST_NAME</string>
+    <string name="user_email">USER_EMAIL</string>
+    <string name="user_gender">USER_GENDER</string>
+    <string name="user_access_token">USER_ACCESS_TOKEN</string>
+    <string name="user_woney">USER_WONEY</string>
+
     <string name="tour_page_1">Join Woney,\ngather big cash with the community.</string>
     <string name="tour_page_2">Earn Woney credit to bet.\nThe more you bet,\nthe more chance you win.</string>
     <string name="tour_page_3">Lucky draw\ncomplete weekly.\nYou may win BIG cash.</string>

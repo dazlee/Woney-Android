@@ -5,29 +5,37 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.ads.AdRequest;
 import com.tapjoy.TJPlacement;
 import com.tapjoy.Tapjoy;
 import com.woney.R;
 import com.woney.adpt.ViewPagerAdapter;
+import com.woney.data.UserData;
 import com.woney.fragment.EarnMainFragment;
 import com.woney.fragment.EarnSettingFragment;
 import com.woney.fragment.EarnWinnerFragment;
 import com.woney.fragment.FbLogoutDialog;
+import com.woney.req.FacebookReq;
+import com.woney.util.SystemUtil;
 import com.woney.util.TapjoyUtil;
-import com.woney.util.UserUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static UserData woneyUser;
+
     CallbackManager callbackManager;
+
     private static ViewPager viewPager;
     private TabLayout tabLayout;
     private int[] tabIcons = {
@@ -46,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        LoginManager.getInstance().registerCallback(callbackManager, UserUtil.facebookCallback);
+        LoginManager.getInstance().registerCallback(callbackManager, facebookCallback);
 
-        initScreen();
+        setupScreenCust();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -57,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
 
-        UserUtil.initUser();
+        loadUserData();
+    }
+
+    private void loadUserData() {
+        woneyUser = SystemUtil.loadUser(getApplicationContext());
+        woneyUser.updateByFbProfile();
+        woneyUser.syncWoney();
     }
 
     @Override
@@ -99,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickDailyEarn(View view) throws Exception {
-        if (UserUtil.canEarnDaylyToday()) {
+        if (woneyUser.canEarnDaylyToday()) {
             Toast.makeText(getApplicationContext(), "賺取今天任務", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getApplicationContext(), "今天賺過囉", Toast.LENGTH_LONG).show();
@@ -111,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fbLogin(View view) {
-        LoginManager.getInstance().logInWithReadPermissions(this, UserUtil.getFbGeneralPermission());
+        LoginManager.getInstance().logInWithReadPermissions(this, woneyUser.getFbGeneralPermission());
     }
 
     public void fbLogout(View view) {
@@ -121,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickDraw(View view) {
-        if (UserUtil.isFbLogin()) {
-            if (UserUtil.isEnoughDraw()) {
+        if (woneyUser.isFbLogin()) {
+            if (woneyUser.isEnoughDraw()) {
                 Toast.makeText(getApplicationContext(), "有登入FB且錢夠", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "有登入FB但錢不夠", Toast.LENGTH_LONG).show();
@@ -140,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        woneyUser.saveUpdate(getApplicationContext());
     }
 
     @Override
@@ -151,10 +166,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initScreen();
+        setupScreenCust();
     }
 
-    private void initScreen() {
+    private void setupScreenCust() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
@@ -164,17 +179,40 @@ public class MainActivity extends AppCompatActivity {
         //       .addTestDevice(getString(R.string.google));
     }
 
-    public static void setupFbLogin() {
+    public static void setupFbLoginView() {
         View settingView = viewPager.findViewWithTag(R.string.main_tab_setting);
         if (settingView != null) {
             EarnSettingFragment.setupLoginView(settingView);
         }
     }
 
-    public static void setupFbLogout() {
+    public static void setupFbLogoutView() {
         View settingView = viewPager.findViewWithTag(R.string.main_tab_setting);
         if (settingView != null) {
             EarnSettingFragment.setupLogoutView(settingView);
         }
+    }
+
+    public FacebookCallback<LoginResult> facebookCallback = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            Log.d("FB", "Access success");
+            AccessToken accessToken = loginResult.getAccessToken();
+            FacebookReq.sendMeReq(accessToken);
+        }
+
+        @Override
+        public void onCancel() {
+            Log.d("FB", "Cancel");
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+            Log.d("FB", error.toString());
+        }
+    };
+
+    public static UserData getUser() {
+        return woneyUser;
     }
 }

@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -15,7 +14,7 @@ import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.woney.R;
 import com.woney.activity.MainActivity;
-import com.woney.util.UserUtil;
+import com.woney.data.UserData;
 
 /**
  * Created by houan on 2016/12/3.
@@ -30,13 +29,14 @@ public class FbLogoutDialog extends DialogFragment {
             .setPositiveButton(R.string.alert_fb_logout_btn_true, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    if (UserUtil.getAccessToken() != null) {
-                        new GraphRequest(UserUtil.getAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                    UserData user = MainActivity.getUser();
+                    if (user.getAccessToken() != null) {
+                        new GraphRequest(user.getAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
                                 .Callback() {
                             @Override
                             public void onCompleted(GraphResponse graphResponse) {
                                 LoginManager.getInstance().logOut();
-                                MainActivity.setupFbLogout();
+                                MainActivity.setupFbLogoutView();
                             }
                         }).executeAsync();
 

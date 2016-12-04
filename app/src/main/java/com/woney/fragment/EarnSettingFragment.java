@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.facebook.login.widget.ProfilePictureView;
 import com.woney.R;
-import com.woney.util.UserUtil;
+import com.woney.activity.MainActivity;
+import com.woney.data.UserData;
 
 public class EarnSettingFragment extends Fragment {
     private static TextView textFbName;
@@ -39,9 +40,10 @@ public class EarnSettingFragment extends Fragment {
     }
 
     public static void setupLoginView(View view) {
-        if (UserUtil.isFbLogin()) {
-            textFbName.setText(UserUtil.getFbName());
-            pic.setProfileId(UserUtil.getFacebookId());
+        UserData user = MainActivity.getUser();
+        if (user.isFbLogin()) {
+            textFbName.setText(user.getFbName());
+            pic.setProfileId(user.getFacebookID());
             loginArea.setVisibility(View.GONE);
         }
     }
