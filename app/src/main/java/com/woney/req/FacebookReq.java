@@ -34,6 +34,7 @@ public class FacebookReq {
 
                         UserData userData = MainActivity.getUser();
                         userData.updateByReqCb(id, email, gender);
+                        userData.syncWoney();
                         MainActivity.setupFbLoginView();
                     }
                 });

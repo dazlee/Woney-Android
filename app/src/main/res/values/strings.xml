@@ -5,14 +5,29 @@
 
     <string name="sys_is_first">FIRST_TIME_START</string>
 
-    <string name="user_facebook_id">USER_FACEBOOK_ID</string>
-    <string name="user_first_name">USER_FIRST_NAME</string>
-    <string name="user_middle_name">USER_MIDDLE_NAME</string>
-    <string name="user_last_name">USER_LAST_NAME</string>
-    <string name="user_email">USER_EMAIL</string>
-    <string name="user_gender">USER_GENDER</string>
-    <string name="user_access_token">USER_ACCESS_TOKEN</string>
-    <string name="user_woney">USER_WONEY</string>
+    <string-array name="woney_user_vars">
+        <item></item>
+    </string-array>
+
+    <string-array name="fb_user_vars">
+        <item>@string/user_facebook_id</item>
+        <item>@string/user_first_name</item>
+        <item>@string/user_middle_name</item>
+        <item>@string/user_last_name</item>
+        <item>@string/user_email</item>
+        <item>@string/user_gender</item>
+        <item>@string/user_photo_url</item>
+    </string-array>
+
+    <string name="user_facebook_id">facebookId</string>
+    <string name="user_first_name">firstName</string>
+    <string name="user_middle_name">middleName</string>
+    <string name="user_last_name">lastName</string>
+    <string name="user_email">email</string>
+    <string name="user_gender">gender</string>
+    <string name="user_photo_url">photo</string>
+
+    <string name="user_woney">woney</string>
 
     <string name="tour_page_1">Join Woney,\ngather big cash with the community.</string>
     <string name="tour_page_2">Earn Woney credit to bet.\nThe more you bet,\nthe more chance you win.</string>

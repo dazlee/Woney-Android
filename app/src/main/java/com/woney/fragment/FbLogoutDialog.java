@@ -29,18 +29,18 @@ public class FbLogoutDialog extends DialogFragment {
             .setPositiveButton(R.string.alert_fb_logout_btn_true, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    UserData user = MainActivity.getUser();
+                    final UserData user = MainActivity.getUser();
                     if (user.getAccessToken() != null) {
                         new GraphRequest(user.getAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
                                 .Callback() {
                             @Override
                             public void onCompleted(GraphResponse graphResponse) {
                                 LoginManager.getInstance().logOut();
+                                UserData user = MainActivity.getUser();
+                                user.logoutFb();
                                 MainActivity.setupFbLogoutView();
                             }
                         }).executeAsync();
-
-                        //Toast.makeText(getApplicationContext(), "Facebook Logout", Toast.LENGTH_LONG).show();
                     }
                 }
             })

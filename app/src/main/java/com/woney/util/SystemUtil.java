@@ -46,13 +46,9 @@ public class SystemUtil {
         SharedPreferences.Editor editor = prefs.edit();
         Resources res = context.getResources();
 
-        editor.putString(res.getString(R.string.user_facebook_id), user.getFacebookID());
-        editor.putString(res.getString(R.string.user_first_name), user.getFirstName());
-        editor.putString(res.getString(R.string.user_last_name), user.getLastName());
-        editor.putString(res.getString(R.string.user_middle_name), user.getMiddleName());
-        editor.putString(res.getString(R.string.user_email), user.getEmail());
-        editor.putString(res.getString(R.string.user_gender), user.getGender());
-        editor.putInt(res.getString(R.string.user_woney), user.getWoney());
+        for (String key : res.getStringArray(R.array.fb_user_vars)) {
+            editor.putString(key, user.getBasicData(key));
+        }
 
         editor.commit();
     }
@@ -61,14 +57,10 @@ public class SystemUtil {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Resources res = context.getResources();
 
-        UserData user = new UserData();
-        user.setFacebookID(prefs.getString(res.getString(R.string.user_facebook_id), null));
-        user.setFirstName(prefs.getString(res.getString(R.string.user_first_name), null));
-        user.setLastName(prefs.getString(res.getString(R.string.user_last_name), null));
-        user.setMiddleName(prefs.getString(res.getString(R.string.user_middle_name), null));
-        user.setEmail(prefs.getString(res.getString(R.string.user_email), null));
-        user.setGender(prefs.getString(res.getString(R.string.user_gender), null));
-        user.setWoney(prefs.getInt(res.getString(R.string.user_woney), 0));
+        UserData user = new UserData(res);
+        for (String key : res.getStringArray(R.array.fb_user_vars)) {
+            user.setBasicData(key, prefs.getString(key, null));
+        }
 
         return user;
     }

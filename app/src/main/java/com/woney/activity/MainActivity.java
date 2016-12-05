@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadUserData() {
         woneyUser = SystemUtil.loadUser(getApplicationContext());
-        woneyUser.updateByFbProfile();
-        woneyUser.syncWoney();
+        woneyUser.loadFbData();
     }
 
     @Override
@@ -131,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
     public void fbLogout(View view) {
         FbLogoutDialog logoutDialog = new FbLogoutDialog();
         logoutDialog.show(getSupportFragmentManager(), "fb_logout_dialog");
-
     }
 
     public void clickDraw(View view) {
