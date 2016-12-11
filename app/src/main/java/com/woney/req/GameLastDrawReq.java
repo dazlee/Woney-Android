@@ -1,7 +1,8 @@
 package com.woney.req;
 
-import com.woney.data.UserData;
-import com.woney.data.WoneyContent;
+import com.woney.data.LastDrawData;
+import com.woney.data.WoneyKey;
+import com.woney.fragment.EarnWinnerFragment;
 
 import org.json.JSONObject;
 
@@ -12,16 +13,17 @@ import org.json.JSONObject;
 public class GameLastDrawReq extends HttpReq {
 
     public GameLastDrawReq() {
-        super(WoneyContent.API_GAME_LASTDRAW, WoneyContent.NET_METHOD_GET, null);
+        super(WoneyKey.API_GAME_LASTDRAW, WoneyKey.NET_METHOD_GET);
     }
 
     @Override
-    protected JSONObject genJsonReq(UserData userData) {
-        return null;
-    }
+    public void onFinished(JSONObject jsonObject) {
+        LastDrawData lastDrawData = new LastDrawData();
+        lastDrawData.updateDataByJson(jsonObject);
+        lastDrawData.setFirstWinnerByJson(jsonObject);
+        lastDrawData.setCommonWinnersByJson(jsonObject);
 
-    @Override
-    public void onFinished(String retString) {
-
+        EarnWinnerFragment.setLastDrawData(lastDrawData);
+        EarnWinnerFragment.setupLastDrawView();
     }
 }

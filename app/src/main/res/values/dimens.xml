@@ -7,12 +7,12 @@
     <dimen name="layout_width_dp">358dp</dimen>
 
     <dimen name="setting_fb_btn_textsize">13sp</dimen>
-    
+
     <dimen name="main_top_woney_credits">20sp</dimen>
-    
+
     <dimen name="woney_textsize_10">10sp</dimen>
     <dimen name="woney_textsize_12_5">12.5sp</dimen>
     <dimen name="woney_textsize_17_5">17.5sp</dimen>
     <dimen name="woney_textsize_20">20sp</dimen>
-    <dimen name="woney_textsize_57">57sp</dimen>
+    <dimen name="woney_textsize_50">50sp</dimen>
 </resources>

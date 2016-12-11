@@ -2,32 +2,77 @@
     <string name="app_name">Woney</string>
     <string name="facebook_app_id">201701940275937</string>
     <string name="tapjoy_sdkKey">93wQa0NzRRajWv-k4Bl6QwECctEoatezPMS4xolz9c4HsszGPY1s5o5ykTo0</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6886675595859944/4484191111</string>
+    <string name="gad_ad_unit_id">ca-app-pub-6886675595859944/8480411910</string>
 
     <string name="sys_is_first">FIRST_TIME_START</string>
 
     <string-array name="woney_user_vars">
-        <item></item>
+        <item>@string/user_id</item>
+        <item>@string/user_woney</item>
+        <item>@string/user_total_woney</item>
+        <item>@string/user_won_times</item>
+        <item>@string/user_bets</item>
+        <item>@string/user_access_token</item>
     </string-array>
+
+    <string-array name="api_header_access">
+        <item>@string/user_access_token</item>
+        <item>@string/woney_last_daily_earn</item>
+    </string-array>
+
+    <string name="user_id">_id</string>
+    <string name="user_woney">woney</string>
+    <string name="user_total_woney">totalWoney</string>
+    <string name="user_won_times">wonTimes</string>
+    <string name="user_bets">bets</string>
+    <string name="user_access_token">x-access-token</string>
+    <string name="woney_added_woneys">addedWoneys</string>
+
+    <string name="woney_last_daily_earn">lastDailyEarn</string>
 
     <string-array name="fb_user_vars">
-        <item>@string/user_facebook_id</item>
-        <item>@string/user_first_name</item>
-        <item>@string/user_middle_name</item>
-        <item>@string/user_last_name</item>
-        <item>@string/user_email</item>
-        <item>@string/user_gender</item>
-        <item>@string/user_photo_url</item>
+        <item>@string/fb_user_facebook_id</item>
+        <item>@string/fb_user_first_name</item>
+        <item>@string/fb_user_middle_name</item>
+        <item>@string/fb_user_last_name</item>
+        <item>@string/fb_user_name</item>
+        <item>@string/fb_user_email</item>
+        <item>@string/fb_user_gender</item>
+        <item>@string/fb_user_photo_url</item>
     </string-array>
 
-    <string name="user_facebook_id">facebookId</string>
-    <string name="user_first_name">firstName</string>
-    <string name="user_middle_name">middleName</string>
-    <string name="user_last_name">lastName</string>
-    <string name="user_email">email</string>
-    <string name="user_gender">gender</string>
-    <string name="user_photo_url">photo</string>
+    <string name="fb_user_facebook_id">facebookId</string>
+    <string name="fb_user_first_name">firstName</string>
+    <string name="fb_user_middle_name">middleName</string>
+    <string name="fb_user_last_name">lastName</string>
+    <string name="fb_user_name">displayName</string>
+    <string name="fb_user_email">email</string>
+    <string name="fb_user_gender">gender</string>
+    <string name="fb_user_photo_url">photo</string>
 
-    <string name="user_woney">woney</string>
+    <string-array name="ongoing_resp">
+        <item>@string/api_id</item>
+        <item>@string/api_reward</item>
+        <item>@string/api_sec_reward</item>
+        <item>@string/api_start_time</item>
+        <item>@string/api_end_time</item>
+        <item>@string/api_finished</item>
+        <item>@string/api_series</item>
+    </string-array>
+
+    <string name="api_id">_id</string>
+    <string name="api_reward">reward</string>
+    <string name="api_sec_reward">secondReward</string>
+    <string name="api_start_time">startTime</string>
+    <string name="api_end_time">endTime</string>
+    <string name="api_finished">finished</string>
+    <string name="api_series">series</string>
+    <string name="api_game_id">gameId</string>
+    <string name="api_is_daily_earn">isDailyEarn</string>
+
+    <string name="api_first_winner">firstWinner</string>
+    <string name="api_common_winners">commonWinners</string>
 
     <string name="tour_page_1">Join Woney,\ngather big cash with the community.</string>
     <string name="tour_page_2">Earn Woney credit to bet.\nThe more you bet,\nthe more chance you win.</string>
@@ -46,7 +91,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="earn_top_paypal">Estimate top prize：%1$s</string>
+    <string name="earn_top_paypal">Estimate top prize:</string>
     <string name="earn_top_draw">Next draw in %1$d days %2$d hrs</string>
     <string name="earn_top_btn_luk">Lucky Draw: %1$d</string>
     <string name="earn_top_woneybet">10 Woney \n/ bet</string>
@@ -61,8 +106,7 @@
     <string name="earn_daily_earn_credits">+20 credits</string>
 
     <string name="winner_winner">%1$s Top prize winner:</string>
-    <string name="winner_winner_price">2,310</string>
-    <string name="winner_sec_price">Second prize: $%1$s /each</string>
+    <string name="winner_sec_price">Second prize: %1$d /each</string>
     <string name="winner_history">History</string>
     <string name="winner_buttom_msg">We will inform the winner via facebook messenger.</string>
 
@@ -77,4 +121,11 @@
     <string name="alert_fb_logout">Logout your facebook?</string>
     <string name="alert_fb_logout_btn_true">Logout</string>
     <string name="alert_fb_logout_btn_false">Cancel</string>
+
+    <string name="dialog_congratulations">Congratulations!</string>
+    <string name="dialog_woney_reward">%1$d Woney reward.</string>
+    <string name="dialog_collect">Collect</string>
+    <string name="dialog_already_gain">You have already collected today.</string>
+    <string name="dialog_back_tomorrow">Come back tomorrow.</string>
+    <string name="dialog_ok">OK</string>
 </resources>

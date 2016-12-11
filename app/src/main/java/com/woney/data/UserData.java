@@ -1,8 +1,5 @@
 package com.woney.data;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -10,44 +7,43 @@ import android.util.Log;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.woney.R;
+import com.woney.activity.MainActivity;
+import com.woney.fragment.EarnMainFragment;
 import com.woney.req.FacebookReq;
-import com.woney.req.SingUpReq;
-import com.woney.util.RestClient;
+import com.woney.timer.SyncDrawTask;
 import com.woney.util.SystemUtil;
+
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Timer;
 
 /**
  * Created by houan on 2016/12/3.
  */
 
-public class UserData {
+public class UserData extends CoreData {
     private static final List<String> FB_GENERAL_PERMISSION = Arrays.asList("public_profile", "email");
-    private static final int drawAtTime = 10;
-    private static boolean isUpdate;
-    private static Resources res;
-    private static ContentValues basicData;
+    private static boolean isLoadFb;
+    private static boolean isLoadWoney;
+
+    private Timer timer = new Timer(true);
+    private static final int delaySync = 1500;
+    private SyncDrawTask syncDrawTask;
 
     private AccessToken accessToken;
     private Profile profile;
 
-    private Bitmap myPicture = null;
-
-    // From woney
-    private String woneyAccessToken;
-    private int woney;
-    private int wonTimes;
-    private int totalWoney;
-    private Date lastDailyEarn;
-
-    public UserData(Resources res) {
-        this.basicData = new ContentValues();
-        this.res = res;
+    public UserData() {
+        super();
+        resetUpdateFlag();
     }
 
     public void loadFbData() {
@@ -67,23 +63,16 @@ public class UserData {
         }
 
         isUpdate = false;
-        updateArg(getKeyEmail(), getEmail(), email);
-        updateArg(getKeyGender(), getGender(), gender);
+        updateValue(WoneyKey.getEmailKey(), getEmail(), email);
+        updateValue(WoneyKey.getGenderKey(), getGender(), gender);
 
         if (profile != null) {
-            updateArg(getKeyFacebookID(), getFacebookID(), profile.getId());
-            updateArg(getKeyFirstName(), getFirstName(), profile.getFirstName());
-            updateArg(getKeyLastName(), getLastName(), profile.getLastName());
-            updateArg(getKeyMiddleName(), getMiddleName(), profile.getMiddleName());
-            updateArg(getKeyPhotoUrl(), getPhotoUrl(), getPhotoUrlByID());
-        }
-    }
-
-    public void syncWoney() {
-        if (isFbLogin()) {
-            SingUpReq req = new SingUpReq(this);
-            RestClient restClient = new RestClient(req);
-            restClient.execute();
+            updateValue(WoneyKey.getFacebookIDKey(), getFacebookID(), profile.getId());
+            updateValue(WoneyKey.getFirstNameKey(), getFirstName(), profile.getFirstName());
+            updateValue(WoneyKey.getLastNameKey(), getLastName(), profile.getLastName());
+            updateValue(WoneyKey.getMiddleNameKey(), getMiddleName(), profile.getMiddleName());
+            updateValue(WoneyKey.getPhotoUrlKey(), getPhotoUrl(), getPhotoUrlByID());
+            updateValue(WoneyKey.getNameKey(), getName(), profile.getName());
         }
     }
 
@@ -91,72 +80,32 @@ public class UserData {
         return accessToken;
     }
 
-    public ContentValues getBasicDataMap() {
-        return basicData;
-    }
-
-    public String getBasicData(String key) {
-        return basicData.getAsString(key);
-    }
-
-    public void setBasicData(String key, String value) {
-        basicData.put(key, value);
-    }
-
-    private String getKeyFacebookID() {
-        return res.getString(R.string.user_facebook_id);
-    }
-
     public String getFacebookID() {
-        return basicData.getAsString(getKeyFacebookID());
-    }
-
-    private String getKeyFirstName() {
-        return res.getString(R.string.user_first_name);
+        return values.getAsString(WoneyKey.getFacebookIDKey());
     }
 
     public String getFirstName() {
-        return basicData.getAsString(getKeyFirstName());
-    }
-
-    private String getKeyLastName() {
-        return res.getString(R.string.user_last_name);
+        return values.getAsString(WoneyKey.getFirstNameKey());
     }
 
     public String getLastName() {
-        return basicData.getAsString(getKeyLastName());
-    }
-
-    private String getKeyMiddleName() {
-        return res.getString(R.string.user_middle_name);
+        return values.getAsString(WoneyKey.getLastNameKey());
     }
 
     public String getMiddleName() {
-        return basicData.getAsString(getKeyMiddleName());
-    }
-
-    private String getKeyEmail() {
-        return res.getString(R.string.user_email);
+        return values.getAsString(WoneyKey.getMiddleNameKey());
     }
 
     public String getEmail() {
-        return basicData.getAsString(getKeyEmail());
-    }
-
-    private String getKeyGender() {
-        return res.getString(R.string.user_gender);
+        return values.getAsString(WoneyKey.getEmailKey());
     }
 
     public String getGender() {
-        return basicData.getAsString(getKeyGender());
-    }
-
-    private String getKeyPhotoUrl() {
-        return res.getString(R.string.user_photo_url);
+        return values.getAsString(WoneyKey.getGenderKey());
     }
 
     public String getPhotoUrl() {
-        return basicData.getAsString(getKeyPhotoUrl());
+        return values.getAsString(WoneyKey.getPhotoUrlKey());
     }
 
     private String getPhotoUrlByID() {
@@ -166,52 +115,86 @@ public class UserData {
         return null;
     }
 
-    public int getWoney() {
-        return woney;
+    public Integer getWoney() {
+        return values.getAsInteger(WoneyKey.getWoneyKey());
+    }
+
+    public Integer getTotalWoney() {
+        return values.getAsInteger(WoneyKey.getTotalWoneyKey());
+    }
+
+    public Integer getBets() {
+        return values.getAsInteger(WoneyKey.getBetsKey());
+    }
+
+    public Date getLastDailyEarn() {
+        return SystemUtil.tzStr2Date(values.getAsString(WoneyKey.getLastDailyEarnKey()));
     }
 
     public void setFacebookID(String facebookID) {
-        basicData.put(getKeyFacebookID(), facebookID);
+        values.put(WoneyKey.getFacebookIDKey(), facebookID);
     }
 
     public void setFirstName(String firstName) {
-        basicData.put(getKeyFirstName(), firstName);
+        values.put(WoneyKey.getFirstNameKey(), firstName);
     }
 
     public void setLastName(String lastName) {
-        basicData.put(getKeyLastName(), lastName);
+        values.put(WoneyKey.getLastNameKey(), lastName);
     }
 
     public void setMiddleName(String middleName) {
-        basicData.put(getKeyMiddleName(), middleName);
+        values.put(WoneyKey.getMiddleNameKey(), middleName);
     }
 
     public void setEmail(String email) {
-        basicData.put(getKeyEmail(), email);
+        values.put(WoneyKey.getEmailKey(), email);
     }
 
     public void setGender(String gender) {
-        basicData.put(getKeyGender(), gender);
+        values.put(WoneyKey.getGenderKey(), gender);
     }
 
     public void setPhotoUrl(String photoUrl) {
-        basicData.put(getKeyPhotoUrl(), photoUrl);
+        values.put(WoneyKey.getPhotoUrlKey(), photoUrl);
     }
 
     public void setWoney(int woney) {
-        this.woney = woney;
+        values.put(WoneyKey.getWoneyKey(), woney);
+    }
+
+    public void setLastDailyEarn(Date lastDailyEarn) {
+        values.put(WoneyKey.getLastDailyEarnKey(), SystemUtil.date2TzStr(lastDailyEarn));
+    }
+
+    public void setTotalWoney(int totalWoney) {
+        values.put(WoneyKey.getTotalWoneyKey(), totalWoney);
+    }
+
+    public void setBets(Integer bets) {
+        values.put(WoneyKey.getBetsKey(), bets);
+    }
+
+    public String getFormatLukDraw() {
+        Integer bets = getBets();
+        if (bets == null) {
+            bets = 0;
+            // TODO
+        }
+        return WoneyKey.getStringFormated(R.string.earn_top_btn_luk, bets);
     }
 
     public boolean isEnoughDraw() {
-        return (woney > drawAtTime) ? true : false;
+        return (getWoney() >= WoneyKey.woneyPerBets) ? true : false;
     }
 
     public boolean canEarnDaylyToday() throws Exception {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date today = formatter.parse(formatter.format(new Date()));
+        Date lastDailyEarn = getLastDailyEarn();
 
         if (lastDailyEarn == null || lastDailyEarn.before(today)) {
-            lastDailyEarn = today;
+            setLastDailyEarn(today);
             return true;
         }
         return false;
@@ -225,34 +208,14 @@ public class UserData {
         return FB_GENERAL_PERMISSION;
     }
 
-    public String getFbName() {
+    public String getName() {
         return (profile != null) ? profile.getName() : null;
     }
 
-    public Bitmap getProfilePicture() {
-        if (myPicture == null) {
-            try {
-                URL profilePicUrl = new URL("http://graph.facebook.com/" + profile.getId() + "/picture?type=large");
-                myPicture = BitmapFactory.decodeStream(profilePicUrl.openConnection().getInputStream());
-            } catch (Exception e) {
-                Log.e("FB", "Load profile picture failed!", e);
-                return null;
-            }
-        }
-        return myPicture;
-    }
-
-    private void updateArg(String key, String arg1, String arg2) {
-        if (arg1 == null || arg1.equals(arg2)) {
-            isUpdate = true;
-            basicData.put(key, arg2);
-        }
-    }
-
-    public void saveUpdate(Context context) {
-        if (isUpdate) {
-            SystemUtil.saveUser(context, this);
-            isUpdate = false;
+    private void saveUpdate() {
+        if (isLoadFb && isLoadWoney && isUpdate) {
+            SystemUtil.saveUser(this);
+            resetUpdateFlag();
         }
     }
 
@@ -261,14 +224,71 @@ public class UserData {
         accessToken = null;
     }
 
-    @Override
-    public String toString() {
-        return "UserData{" +
-                "basic data=" + basicData.toString() +
-                ", accessToken=" + accessToken +
-                ", woney=" + woney +
-                ", woneyToken='" + woneyAccessToken + '\'' +
-                ", lastDailyEarn=" + lastDailyEarn +
-                '}';
+    public void finishLoadFb() {
+        this.isLoadFb = true;
+        saveUpdate();
+    }
+
+    public void finishLoadWoney() {
+        this.isLoadWoney = true;
+        saveUpdate();
+    }
+
+    private void resetUpdateFlag() {
+        this.isUpdate = false;
+        this.isLoadFb = false;
+        this.isLoadWoney = false;
+    }
+
+    public void updateWoneyDataByJson(JSONObject jsonObject) {
+        updateValueByJson(WoneyKey.getWoneyDataKeyArray(), jsonObject);
+    }
+
+    public void updateUserDataByJson(JSONObject jsonObject) {
+        updateValueByJson(WoneyKey.getFbKeyArray(), jsonObject);
+    }
+
+    public JSONObject getUserReq() {
+        return getReqJson(WoneyKey.getFbKeyArray());
+    }
+
+    public Map<String, String> getAccessHeaderMap() {
+        Map<String, String> header = new HashMap<>();
+        for (String key : WoneyKey.getAccessKeyArray()) {
+            header.put(key, values.getAsString(key));
+        }
+        return header;
+    }
+
+    public synchronized void addWoney(Integer gain) {
+        setWoney(getWoney() + gain);
+        setTotalWoney(getTotalWoney());
+    }
+
+    public synchronized void lessWoney(Integer less) {
+        setWoney(getWoney() - less);
+    }
+
+    public synchronized void addBets(Integer add) {
+        setBets(getBets() + add);
+    }
+
+    public synchronized void draw() {
+        lessWoney(WoneyKey.woneyPerBets);
+        addBets(WoneyKey.betsPerClick);
+        MainActivity.setupWoneyCreditView();
+        EarnMainFragment.setupBetsBtn();
+
+        if (syncDrawTask != null) {
+            syncDrawTask.cancel();
+            clearSyncDrawTime();
+        }
+
+        syncDrawTask = new SyncDrawTask();
+        timer.schedule(syncDrawTask, delaySync);
+    }
+
+    public void clearSyncDrawTime() {
+        syncDrawTask = null;
     }
 }

@@ -1,12 +1,12 @@
 package com.woney.req;
 
-import android.content.ContentValues;
 import android.util.Log;
 
+import com.woney.activity.MainActivity;
 import com.woney.data.UserData;
-import com.woney.data.WoneyContent;
+import com.woney.data.WoneyKey;
+import com.woney.fragment.EarnMainFragment;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -15,35 +15,21 @@ import org.json.JSONObject;
 
 public class SingUpReq extends HttpReq {
 
+    private UserData userData;
+
     public SingUpReq(UserData userData) {
-        super(WoneyContent.API_SINGUP, WoneyContent.NET_METHOD_POST, userData);
+        super(WoneyKey.API_SINGUP, WoneyKey.NET_METHOD_POST, userData.getUserReq());
+        this.userData = userData;
     }
 
     @Override
-    protected JSONObject genJsonReq(UserData userData) {
-        JSONObject jsonObject = new JSONObject();
+    public void onFinished(JSONObject jsonObject) {
+        Log.d("HTTP", jsonObject.toString());
 
-        ContentValues dataMap = userData.getBasicDataMap();
-        try {
-            for (String key : dataMap.keySet()) {
-                jsonObject.put(key, dataMap.get(key));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        userData.updateWoneyDataByJson(jsonObject);
+        userData.finishLoadWoney();
 
-        return jsonObject;
-    }
-
-    @Override
-    public void onFinished(String retString) {
-        try {
-            JSONObject jsonObject = new JSONObject(retString);
-            Log.d("HTTP", jsonObject.toString());
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        MainActivity.setupWoneyCreditView();
+        EarnMainFragment.setupBetsBtn();
     }
 }

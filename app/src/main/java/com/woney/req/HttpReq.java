@@ -1,8 +1,11 @@
 package com.woney.req;
 
-import com.woney.data.UserData;
+import android.util.Log;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by houan on 2016/12/3.
@@ -10,27 +13,43 @@ import org.json.JSONObject;
 
 public abstract class HttpReq {
 
-    private JSONObject reqJson;
-
+    private JSONObject body;
+    private Map<String, String> header;
     private String apiPath;
-
     private String method;
 
-    protected abstract JSONObject genJsonReq(UserData userData);
+    public abstract void onFinished(JSONObject jsonObject);
 
-    public abstract void onFinished(String retString);
+    public HttpReq(String apiPath, String method) {
+        this(apiPath, method, new HashMap<String, String>(), new JSONObject());
+    }
 
-    public HttpReq(String apiPath, String method, UserData userData) {
-        if (userData != null) {
-            this.reqJson = genJsonReq(userData);
-        }
+    public HttpReq(String apiPath, String method, Map<String, String> header) {
+        this(apiPath, method, header, new JSONObject());
+    }
+
+    public HttpReq(String apiPath, String method, JSONObject body) {
+        this(apiPath, method, new HashMap<String, String>(), body);
+    }
+
+    public HttpReq(String apiPath, String method, Map<String, String> header, JSONObject body) {
         this.apiPath = apiPath;
         this.method = method;
+        this.header = header;
+        this.body = body;
+    }
+
+    public final void onPreFinished(JSONObject jsonObject) {
+        if (jsonObject.length() == 0) {
+            Log.e("HttpReq", "Request failed!");
+        } else {
+            onFinished(jsonObject);
+        }
     }
 
     public String getReqString() {
-        if (reqJson != null) {
-            return reqJson.toString();
+        if (body != null) {
+            return body.toString();
         }
         return "";
     }
@@ -41,5 +60,9 @@ public abstract class HttpReq {
 
     public String getMethod() {
         return method;
+    }
+
+    public Map<String, String> getHeader() {
+        return header;
     }
 }

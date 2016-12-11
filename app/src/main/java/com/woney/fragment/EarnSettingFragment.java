@@ -42,7 +42,7 @@ public class EarnSettingFragment extends Fragment {
     public static void setupLoginView(View view) {
         UserData user = MainActivity.getUser();
         if (user.isFbLogin()) {
-            textFbName.setText(user.getFbName());
+            textFbName.setText(user.getName());
             pic.setProfileId(user.getFacebookID());
             loginArea.setVisibility(View.GONE);
         }
