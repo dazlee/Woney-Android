@@ -1,7 +1,5 @@
 package com.woney.data;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -15,15 +13,16 @@ import com.woney.util.SystemUtil;
 
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by houan on 2016/12/3.
@@ -31,11 +30,11 @@ import java.util.Timer;
 
 public class UserData extends CoreData {
     private static final List<String> FB_GENERAL_PERMISSION = Arrays.asList("public_profile", "email");
-    private static boolean isLoadFb;
-    private static boolean isLoadWoney;
+    private boolean isLoadFb;
+    private boolean isLoadWoney;
 
-    private Timer timer = new Timer(true);
     private static final int delaySync = 1500;
+    private Timer timer = new Timer(true);
     private SyncDrawTask syncDrawTask;
 
     private AccessToken accessToken;
@@ -72,7 +71,7 @@ public class UserData extends CoreData {
             updateValue(WoneyKey.getLastNameKey(), getLastName(), profile.getLastName());
             updateValue(WoneyKey.getMiddleNameKey(), getMiddleName(), profile.getMiddleName());
             updateValue(WoneyKey.getPhotoUrlKey(), getPhotoUrl(), getPhotoUrlByID());
-            updateValue(WoneyKey.getNameKey(), getName(), profile.getName());
+            updateValue(WoneyKey.getDisplayNameKey(), getDisplayName(), profile.getName());
         }
     }
 
@@ -81,31 +80,35 @@ public class UserData extends CoreData {
     }
 
     public String getFacebookID() {
-        return values.getAsString(WoneyKey.getFacebookIDKey());
+        return getStringByKey(WoneyKey.getFacebookIDKey());
+    }
+
+    public String getDisplayName() {
+        return getStringByKey(WoneyKey.getDisplayNameKey());
     }
 
     public String getFirstName() {
-        return values.getAsString(WoneyKey.getFirstNameKey());
+        return getStringByKey(WoneyKey.getFirstNameKey());
     }
 
     public String getLastName() {
-        return values.getAsString(WoneyKey.getLastNameKey());
+        return getStringByKey(WoneyKey.getLastNameKey());
     }
 
     public String getMiddleName() {
-        return values.getAsString(WoneyKey.getMiddleNameKey());
+        return getStringByKey(WoneyKey.getMiddleNameKey());
     }
 
     public String getEmail() {
-        return values.getAsString(WoneyKey.getEmailKey());
+        return getStringByKey(WoneyKey.getEmailKey());
     }
 
     public String getGender() {
-        return values.getAsString(WoneyKey.getGenderKey());
+        return getStringByKey(WoneyKey.getGenderKey());
     }
 
     public String getPhotoUrl() {
-        return values.getAsString(WoneyKey.getPhotoUrlKey());
+        return getStringByKey(WoneyKey.getPhotoUrlKey());
     }
 
     private String getPhotoUrlByID() {
@@ -116,19 +119,32 @@ public class UserData extends CoreData {
     }
 
     public Integer getWoney() {
-        return values.getAsInteger(WoneyKey.getWoneyKey());
+        return getIntegerByKey(WoneyKey.getWoneyKey());
     }
 
     public Integer getTotalWoney() {
-        return values.getAsInteger(WoneyKey.getTotalWoneyKey());
+        return getIntegerByKey(WoneyKey.getTotalWoneyKey());
     }
 
     public Integer getBets() {
-        return values.getAsInteger(WoneyKey.getBetsKey());
+        return getIntegerByKey(WoneyKey.getBetsKey());
     }
 
     public Date getLastDailyEarn() {
-        return SystemUtil.tzStr2Date(values.getAsString(WoneyKey.getLastDailyEarnKey()));
+        return SystemUtil.tzStr2Date(getStringByKey(WoneyKey.getLastDailyEarnKey()));
+    }
+
+    public Date getLastFbShare() {
+        return SystemUtil.tzStr2Date(getStringByKey(WoneyKey.getLastFbShareKey()));
+    }
+
+    public String getShowName() {
+        String displayName = getDisplayName();
+        if (displayName != null && displayName != "") {
+            return displayName;
+        } else {
+            return getFirstName() + " " + getLastName();
+        }
     }
 
     public void setFacebookID(String facebookID) {
@@ -141,6 +157,10 @@ public class UserData extends CoreData {
 
     public void setLastName(String lastName) {
         values.put(WoneyKey.getLastNameKey(), lastName);
+    }
+
+    public void setDisplayName(String displayName) {
+        values.put(WoneyKey.getDisplayNameKey(), displayName);
     }
 
     public void setMiddleName(String middleName) {
@@ -160,19 +180,29 @@ public class UserData extends CoreData {
     }
 
     public void setWoney(int woney) {
-        values.put(WoneyKey.getWoneyKey(), woney);
+        String key = WoneyKey.getWoneyKey();
+        values.put(key, woney);
+        SystemUtil.saveStringValue(key, String.valueOf(woney));
     }
 
     public void setLastDailyEarn(Date lastDailyEarn) {
         values.put(WoneyKey.getLastDailyEarnKey(), SystemUtil.date2TzStr(lastDailyEarn));
     }
 
+    public void setLastFbShare(Date lastFbShare) {
+        values.put(WoneyKey.getLastFbShareKey(), SystemUtil.date2TzStr(lastFbShare));
+    }
+
     public void setTotalWoney(int totalWoney) {
-        values.put(WoneyKey.getTotalWoneyKey(), totalWoney);
+        String key = WoneyKey.getTotalWoneyKey();
+        values.put(key, totalWoney);
+        SystemUtil.saveStringValue(key, String.valueOf(totalWoney));
     }
 
     public void setBets(Integer bets) {
+        String key = WoneyKey.getBetsKey();
         values.put(WoneyKey.getBetsKey(), bets);
+        SystemUtil.saveStringValue(key, String.valueOf(bets));
     }
 
     public String getFormatLukDraw() {
@@ -200,16 +230,33 @@ public class UserData extends CoreData {
         return false;
     }
 
+    public boolean canShareFb() {
+        Date lastFbShare = getLastFbShare();
+
+        if (lastFbShare != null && getFbShareUnlockTime().after(new Date())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public Date getFbShareUnlockTime() {
+        Date lastFbShare = getLastFbShare();
+        if (lastFbShare != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(lastFbShare);
+            cal.add(Calendar.HOUR_OF_DAY, WoneyKey.intervalShareHR);
+            return cal.getTime();
+        }
+        return null;
+    }
+
     public boolean isFbLogin() {
         return accessToken != null && profile != null ? true : false;
     }
 
     public List<String> getFbGeneralPermission() {
         return FB_GENERAL_PERMISSION;
-    }
-
-    public String getName() {
-        return (profile != null) ? profile.getName() : null;
     }
 
     private void saveUpdate() {
@@ -222,6 +269,12 @@ public class UserData extends CoreData {
     public void logoutFb() {
         profile = null;
         accessToken = null;
+    }
+
+    public void clearData() {
+        setWoney(0);
+        setBets(0);
+        SystemUtil.saveUser(this);
     }
 
     public void finishLoadFb() {
@@ -255,7 +308,7 @@ public class UserData extends CoreData {
     public Map<String, String> getAccessHeaderMap() {
         Map<String, String> header = new HashMap<>();
         for (String key : WoneyKey.getAccessKeyArray()) {
-            header.put(key, values.getAsString(key));
+            header.put(key, getStringByKey(key));
         }
         return header;
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.facebook.login.widget.ProfilePictureView;
@@ -17,6 +18,8 @@ public class EarnSettingFragment extends Fragment {
     private static TextView textFbName;
     private static ProfilePictureView pic;
     private static LinearLayout loginArea;
+    private static LinearLayout settingLayout;
+    private static ScrollView scrollView;
 
     public EarnSettingFragment() {
         // Required empty public constructor
@@ -34,15 +37,17 @@ public class EarnSettingFragment extends Fragment {
         textFbName = (TextView) view.findViewById(R.id.setting_fb_name);
         pic = (ProfilePictureView) view.findViewById(R.id.setting_fb_img);
         loginArea = (LinearLayout) view.findViewById(R.id.setting_fb_login_layout);
+        settingLayout = (LinearLayout) view.findViewById(R.id.setting_layout);
+        scrollView = (ScrollView) view.findViewById(R.id.setting_scroll_layout);
 
-        setupLoginView(view);
+        setupFbLoginView();
         return view;
     }
 
-    public static void setupLoginView(View view) {
+    public static void setupFbLoginView() {
         UserData user = MainActivity.getUser();
-        if (user.isFbLogin()) {
-            textFbName.setText(user.getName());
+        if (user.isFbLogin() && textFbName != null) {
+            textFbName.setText(user.getDisplayName());
             pic.setProfileId(user.getFacebookID());
             loginArea.setVisibility(View.GONE);
         }
@@ -52,5 +57,23 @@ public class EarnSettingFragment extends Fragment {
         textFbName.setText(view.getResources().getString(R.string.setting_fb_gusee));
         pic.setProfileId(null);
         loginArea.setVisibility(View.VISIBLE);
+    }
+
+    public static void clickHow() {
+        if (settingLayout.getVisibility() == View.VISIBLE) {
+            settingLayout.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public static boolean pressBack() {
+        boolean isSettingPage;
+        if (scrollView != null && scrollView.getVisibility() == View.VISIBLE) {
+            settingLayout.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+            return false;
+        } else {
+            return true;
+        }
     }
 }

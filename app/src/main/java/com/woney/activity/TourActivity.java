@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.viewpagerindicator.CirclePageIndicator;
 import com.woney.R;
 import com.woney.adpt.ViewPagerAdapter;
 import com.woney.fragment.Tour1Fragment;
@@ -19,10 +20,26 @@ public class TourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_tour);
+
+        initView();
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
+
+        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.CirclePageindicator);
+        circlePageIndicator.setViewPager(mViewPager);
+    }
+
+    private void initView() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
     private void setupViewPager(ViewPager mViewPager) {
@@ -34,8 +51,16 @@ public class TourActivity extends AppCompatActivity {
     }
 
     public void startUse(View view) {
-        SystemUtil.finishedTour(getBaseContext());
-        startActivity(new Intent(TourActivity.this, MainActivity.class));
+        if (SystemUtil.isFirstStarted(getApplicationContext())) {
+            SystemUtil.finishedTour(getBaseContext());
+            if (SystemUtil.isConnectedToInternet(getApplicationContext())) {
+                startActivity(new Intent(TourActivity.this, MainActivity.class));
+            } else {
+                SystemUtil.showNoConnect(getApplicationContext());
+            }
+        } else {
+            onBackPressed();
+        }
         finish();
     }
 }

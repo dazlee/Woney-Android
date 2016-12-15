@@ -23,8 +23,7 @@ import java.util.Map;
  */
 
 public class RestClient extends AsyncTask<Void, Void, String> {
-    private static String DEV_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:3000";
-    private static String PROD_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:3000";
+    private static String urlStr;
 
     private HttpReq httpReq;
 
@@ -34,6 +33,7 @@ public class RestClient extends AsyncTask<Void, Void, String> {
 
     public RestClient(HttpReq httpReq) {
         this.httpReq = httpReq;
+        urlStr = WoneyKey.devMode ? WoneyKey.DEV_URL : WoneyKey.PROD_URL;
     }
 
     @Override
@@ -79,7 +79,9 @@ public class RestClient extends AsyncTask<Void, Void, String> {
     private void initConn(String apiPath, String method) {
         Map<String, String> headerMap = httpReq.getHeader();
         try {
-            URL url = new URL(DEV_URL + apiPath);
+            URL url = new URL(urlStr + apiPath);
+            Log.d("HTTP", "URL: " + url.toString());
+
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(15000);
             connection.setConnectTimeout(15000);
@@ -87,7 +89,9 @@ public class RestClient extends AsyncTask<Void, Void, String> {
             connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
             for (String key : headerMap.keySet()) {
-                connection.addRequestProperty(key, headerMap.get(key));
+                String value = headerMap.get(key);
+                Log.d("HTTP", "Header: " + key + "=" + value);
+                connection.addRequestProperty(key, value);
             }
 
             if (method.equals(WoneyKey.NET_METHOD_POST)) {

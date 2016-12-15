@@ -6,6 +6,7 @@ import com.woney.util.SystemUtil;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +42,10 @@ public class OngoingData extends CoreData {
         return values.getAsString(WoneyKey.getIDKey());
     }
 
+    public Integer getSeries() {
+        return values.getAsInteger(WoneyKey.getSeriesKey());
+    }
+
     public String getFormatNextDraw() {
         Date endTime = getEndTime();
         Date nowTime = new Date();
@@ -55,4 +60,19 @@ public class OngoingData extends CoreData {
         int leftHours = totalHours < 0 ? 0 : (int) totalHours%24;
         return WoneyKey.getStringFormated(R.string.earn_top_draw, leftDays, leftHours);
     }
+
+    public String getFormatFirstDraw() {
+        Date endTime = getEndTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm ('GMT'Z) 'on' yyyy/MM/dd");
+        return sdf.format(endTime);
+    }
+
+    public boolean isFirstSeries() {
+        if (getSeries().equals(WoneyKey.lockWinnerSeries)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

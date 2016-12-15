@@ -26,8 +26,14 @@ public abstract class CoreData {
         values.put(key, value);
     }
 
-    public String getValuesByKey(String key) {
-        return values.getAsString(key);
+    public String getStringByKey(String key) {
+        String value = values.getAsString(key);
+        return value != null ? value : "";
+    }
+
+    public Integer getIntegerByKey(String key) {
+        Integer value = values.getAsInteger(key);
+        return value != null ? value : 0;
     }
 
     public void updateValue(String key, String arg1, String arg2) {
@@ -44,7 +50,7 @@ public abstract class CoreData {
             while (it.hasNext()) {
                 String key = it.next();
                 if (keyList.contains(key)) {
-                    updateValue(key, getValuesByKey(key), jsonObject.getString(key));
+                    updateValue(key, getStringByKey(key), jsonObject.getString(key));
                 }
             }
         } catch (JSONException e) {

@@ -19,8 +19,11 @@ public class GainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gain);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
+        Bundle bundle = getIntent().getExtras();
+        Integer gain = bundle.getInt(WoneyKey.GAIN_KEY);
+
         TextView dialogEarnText = (TextView) findViewById(R.id.dialog_earn_text);
-        dialogEarnText.setText(getString(R.string.dialog_woney_reward, WoneyKey.EARN_DAILY));
+        dialogEarnText.setText(getString(R.string.dialog_woney_reward, gain));
     }
 
     public void clickCollect(View view) {

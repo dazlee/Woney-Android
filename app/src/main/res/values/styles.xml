@@ -6,8 +6,10 @@
         <item name="android:textColor">@color/woney_white</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowSoftInputMode">adjustNothing</item>
     </style>
-    
+
     <style name="FullscreenTheme" parent="WoneyTheme">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowBackground">@null</item>
@@ -16,6 +18,7 @@
     </style>
 
     <style name="WoneyDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -48,5 +51,22 @@
         <item name="android:textSize">@dimen/woney_textsize_10</item>
     </style>
 
+    <style name="StyledIndicators" parent="@style/FullscreenTheme">
+        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
+    </style>
 
+    <style name="CustomCirclePageIndicator">
+        <item name="fillColor">@color/woney_dark_green</item>
+        <item name="pageColor">@color/woney_yellow</item>
+        <item name="radius">8dp</item>
+        <item name="centered">true</item>
+    </style>
+
+    <style name="CommonWinnersName">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/woney_textsize_10</item>
+    </style>
 </resources>

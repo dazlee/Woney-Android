@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ import com.woney.util.RestClient;
 
 public class EarnMainFragment extends Fragment {
 
-    private static OngoingData ongoingData;
+    private static OngoingData ongoingData = null;
 
     private static TextView topPrice;
     private static TextView nextDraw;
@@ -52,14 +53,18 @@ public class EarnMainFragment extends Fragment {
         topPrice = (TextView) view.findViewById(R.id.earn_top_price);
         nextDraw = (TextView) view.findViewById(R.id.earn_top_draw);
         luckyDraw = (Button) view.findViewById(R.id.earn_bet_btn);
-        EarnMainFragment.setupBetsBtn();
-        MainActivity.setupWoneyCreditView();
+
+        setupBetsBtn();
     }
 
     private void loadOngoing() {
-        GameOnGoingReq req = new GameOnGoingReq();
-        RestClient restClient = new RestClient(req);
-        restClient.execute();
+        if (ongoingData == null) {
+            GameOnGoingReq req = new GameOnGoingReq();
+            RestClient restClient = new RestClient(req);
+            restClient.execute();
+        } else {
+            setupOngoingView();
+        }
     }
 
     public static void setupOngoingView() {
@@ -89,4 +94,5 @@ public class EarnMainFragment extends Fragment {
                 .addTestDevice("F4ABFC734A9A0D1CBE419F3E2A2D97D2").build();
         adView.loadAd(adRequest);
     }
+
 }

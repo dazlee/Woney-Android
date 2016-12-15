@@ -28,9 +28,13 @@ public class LastDrawData extends OngoingData {
             JSONObject first = jsonObject.getJSONObject(WoneyKey.getFirstWinnerKey());
             firstWinner = new UserData();
             firstWinner.updateUserDataByJson(first);
-            JSONObject nameJson = first.getJSONObject(WoneyKey.getNameKey());
-            firstWinner.setLastName(nameJson.getString(WoneyKey.getLastNameKey()));
-            firstWinner.setFirstName(nameJson.getString(WoneyKey.getFirstNameKey()));
+
+            if (first.has(WoneyKey.getNameKey())) {
+                JSONObject nameJson = first.getJSONObject(WoneyKey.getNameKey());
+                firstWinner.setLastName(nameJson.getString(WoneyKey.getLastNameKey()));
+                firstWinner.setFirstName(nameJson.getString(WoneyKey.getFirstNameKey()));
+                firstWinner.setDisplayName(nameJson.getString(WoneyKey.getDisplayNameKey()));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -44,9 +48,16 @@ public class LastDrawData extends OngoingData {
 
             commonWinners = new UserData[jsonArray.length()];
             for (int i=0; i<jsonArray.length(); i++) {
-                JSONObject subJson = jsonArray.getJSONObject(i);
+                JSONObject userJson = jsonArray.getJSONObject(i);
                 commonWinners[i] = new UserData();
-                commonWinners[i].updateUserDataByJson(subJson);
+                commonWinners[i].updateUserDataByJson(userJson);
+
+                if (userJson.has(WoneyKey.getNameKey())) {
+                    JSONObject nameJson = userJson.getJSONObject(WoneyKey.getNameKey());
+                    commonWinners[i].setLastName(nameJson.getString(WoneyKey.getLastNameKey()));
+                    commonWinners[i].setFirstName(nameJson.getString(WoneyKey.getFirstNameKey()));
+                    commonWinners[i].setDisplayName(nameJson.getString(WoneyKey.getDisplayNameKey()));
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -66,7 +77,7 @@ public class LastDrawData extends OngoingData {
     }
 
     public String getFormatedTopText() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
         String dateStr = "";
         if (getEndTime() != null) {
             dateStr = sdf.format(getEndTime());

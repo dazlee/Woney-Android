@@ -5,15 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/woney_light_green"
     android:orientation="vertical"
-    android:weightSum="27.5">
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-    </LinearLayout>
+    android:weightSum="26.5"
+    android:fitsSystemWindows="true"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +38,7 @@
             />
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.woney.view.WoneyViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -61,5 +55,6 @@
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabTextAppearance="@style/ButtomTabText"
+        app:tabSelectedTextColor="@color/woney_black"
         />
 </LinearLayout>

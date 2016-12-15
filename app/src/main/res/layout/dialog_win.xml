@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/woney_white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/winner_dialog_text"
+        android:textSize="@dimen/woney_textsize_17_5"
+        android:textColor="@color/woney_black"/>
+    <TextView
+        android:id="@+id/winner_first_series_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textSize="@dimen/woney_textsize_17_5"
+        android:textColor="@color/woney_black"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/dialog_ok"
+        android:textSize="@dimen/woney_textsize_20"
+        android:textColor="@color/woney_black"
+        android:background="@drawable/btn_first_winner"
+        android:onClick="clickOK"/>
+
+</LinearLayout>

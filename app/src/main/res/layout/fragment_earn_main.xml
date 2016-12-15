@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|left"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/woney_margin_8"
                 android:textSize="@dimen/woney_textsize_10"
                 android:textColor="@color/woney_black"
                 />
@@ -104,7 +104,7 @@
                     android:id="@+id/earn_wall_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/woney_margin_16"
                     android:src="@drawable/btn_offerwall" />
             </LinearLayout>
 
@@ -113,7 +113,7 @@
                 android:text="@string/earn_offer_wall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/woney_margin_8"
                 style="@style/EarnOptText"
                 />
             <TextView
@@ -141,7 +141,7 @@
                     android:id="@+id/earn_watch_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/woney_margin_16"
                     android:src="@drawable/btn_watch_ads" />
             </LinearLayout>
 
@@ -150,7 +150,7 @@
                 android:text="@string/earn_watch_ads"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/woney_margin_8"
                 style="@style/EarnOptText"
                 />
             <TextView
@@ -187,7 +187,7 @@
                     android:id="@+id/earn_share_img"
                     android:layout_width="41.5dp"
                     android:layout_height="26.5dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/woney_margin_16"
                     android:src="@drawable/btn_fb_share" />
             </LinearLayout>
 
@@ -196,7 +196,7 @@
                 android:text="@string/earn_fb_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/woney_margin_8"
                 style="@style/EarnOptText"
                 />
             <TextView
@@ -224,7 +224,7 @@
                     android:id="@+id/earn_daily_img"
                     android:layout_width="33.5dp"
                     android:layout_height="33.5dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/woney_margin_16"
                     android:src="@drawable/btn_daily_earn" />
             </LinearLayout>
 
@@ -233,7 +233,7 @@
                 android:text="@string/earn_daily_earn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/woney_margin_8"
                 style="@style/EarnOptText"
                 />
             <TextView

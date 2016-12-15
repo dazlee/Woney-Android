@@ -8,6 +8,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.woney.activity.MainActivity;
 import com.woney.data.UserData;
+import com.woney.fragment.EarnSettingFragment;
 import com.woney.util.RestClient;
 
 import org.json.JSONObject;
@@ -41,7 +42,6 @@ public class FacebookReq {
                         RestClient restClient = new RestClient(req);
                         restClient.execute();
                         userData.finishLoadFb();
-                        MainActivity.setupFbLoginView();
                     }
                 });
 
@@ -74,7 +74,7 @@ public class FacebookReq {
                         restClient.execute();
 
                         userData.finishLoadFb();
-                        MainActivity.setupFbLoginView();
+                        EarnSettingFragment.setupFbLoginView();
                     }
                 });
 

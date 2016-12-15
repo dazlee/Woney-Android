@@ -6,6 +6,8 @@ import com.woney.activity.MainActivity;
 import com.woney.data.UserData;
 import com.woney.data.WoneyKey;
 import com.woney.fragment.EarnMainFragment;
+import com.woney.fragment.EarnSettingFragment;
+import com.woney.util.RestClient;
 
 import org.json.JSONObject;
 
@@ -26,10 +28,20 @@ public class SingUpReq extends HttpReq {
     public void onFinished(JSONObject jsonObject) {
         Log.d("HTTP", jsonObject.toString());
 
+        Integer localGain = userData.getWoney();
+
         userData.updateWoneyDataByJson(jsonObject);
         userData.finishLoadWoney();
 
-        MainActivity.setupWoneyCreditView();
         EarnMainFragment.setupBetsBtn();
+        EarnSettingFragment.setupFbLoginView();
+
+        if (localGain != null && localGain != 0) {
+            UserGainReq gainReq = new UserGainReq(userData, localGain);
+            RestClient restClient = new RestClient(gainReq);
+            restClient.execute();
+        } else {
+            MainActivity.setupWoneyCreditView();
+        }
     }
 }

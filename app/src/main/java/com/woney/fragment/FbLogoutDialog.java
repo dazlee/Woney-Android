@@ -31,14 +31,15 @@ public class FbLogoutDialog extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     final UserData user = MainActivity.getUser();
                     if (user.getAccessToken() != null) {
-                        new GraphRequest(user.getAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
-                                .Callback() {
+                        new GraphRequest(user.getAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest.Callback() {
                             @Override
                             public void onCompleted(GraphResponse graphResponse) {
                                 LoginManager.getInstance().logOut();
                                 UserData user = MainActivity.getUser();
                                 user.logoutFb();
+                                user.clearData();
                                 MainActivity.setupFbLogoutView();
+                                MainActivity.setupWoneyCreditView();
                             }
                         }).executeAsync();
                     }

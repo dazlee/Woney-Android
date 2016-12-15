@@ -14,6 +14,14 @@ public class WoneyKey {
     private static Resources res;
     private static Context context;
 
+    public static final boolean devMode = true;
+
+    public static final String DEV_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:3000";
+    public static final String PROD_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:3000";
+
+    public static final String FB_FAN_PAGE = "https://www.facebook.com/woneyglobe";
+    public static final String FB_FAN_PAGE_ID = "176487632824904";
+
     public static final String NET_METHOD_GET = "GET";
     public static final String NET_METHOD_POST = "POST";
 
@@ -24,11 +32,16 @@ public class WoneyKey {
     public static final String API_GAME_ONGOING = "/api/games/ongoing";
     public static final String API_GAME_LASTDRAW = "/api/games/lastDraw";
 
+    public static final int SEC_WINNERS_COUNT = 10;
     public static final int EARN_DAILY = 20;
     public static final int EARN_FB_SHARE = 50;
     public static final int EARN_WATCH_AD = 50;
     public static final int woneyPerBets = 10;
     public static final int betsPerClick = 1;
+    public static final int intervalShareHR = 12;
+    public static final int lockWinnerSeries = 1;
+
+    public static final String GAIN_KEY = "gainKey";
 
     public static void initRes(Context context) {
         WoneyKey.context = context;
@@ -63,6 +76,10 @@ public class WoneyKey {
         return res.getString(R.string.api_is_daily_earn);
     }
 
+    public static String getIsFbShare() {
+        return res.getString(R.string.api_is_fb_share);
+    }
+
     public static String getFacebookIDKey() {
         return res.getString(R.string.fb_user_facebook_id);
     }
@@ -77,6 +94,10 @@ public class WoneyKey {
 
     public static String getMiddleNameKey() {
         return res.getString(R.string.fb_user_middle_name);
+    }
+
+    public static String getDisplayNameKey() {
+        return res.getString(R.string.fb_user_display_name);
     }
 
     public static String getNameKey() {
@@ -109,6 +130,14 @@ public class WoneyKey {
 
     public static String getLastDailyEarnKey() {
         return res.getString(R.string.woney_last_daily_earn);
+    }
+
+    public static String getLastFbShareKey() {
+        return res.getString(R.string.woney_last_fb_share);
+    }
+
+    public static String getSeriesKey() {
+        return res.getString(R.string.api_series);
     }
 
     public static String getAddedWoneyKey() {

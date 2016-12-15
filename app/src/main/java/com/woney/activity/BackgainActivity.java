@@ -1,11 +1,13 @@
 package com.woney.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
 import com.woney.R;
+
+import java.util.Random;
 
 public class BackgainActivity extends AppCompatActivity {
 
@@ -20,5 +22,13 @@ public class BackgainActivity extends AppCompatActivity {
 
     public void clickOK(View view) {
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (Math.random() < 0.5) {
+            MainActivity.requestNewInterstitial();
+        }
     }
 }

@@ -31,9 +31,11 @@ public class Tour3Fragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        /*
         Button button = (Button) getView().findViewById(R.id.tour_btn_start);
         if (!SystemUtil.isFirstStarted(getActivity().getBaseContext())) {
             button.setVisibility(View.INVISIBLE);
         }
+        */
     }
 }

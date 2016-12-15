@@ -1,5 +1,6 @@
 package com.woney.req;
 
+import com.woney.activity.MainActivity;
 import com.woney.data.OngoingData;
 import com.woney.data.WoneyKey;
 import com.woney.fragment.EarnMainFragment;
@@ -20,6 +21,7 @@ public class GameOnGoingReq extends HttpReq {
     public void onFinished(JSONObject jsonObject) {
         OngoingData ongoingData = new OngoingData();
         ongoingData.updateDataByJson(jsonObject);
+        MainActivity.setViewPagerTouch(ongoingData);
         EarnMainFragment.setOngoingData(ongoingData);
         EarnMainFragment.setupOngoingView();
     }

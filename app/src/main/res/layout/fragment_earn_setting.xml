@@ -2,105 +2,243 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10"
     android:background="@drawable/bg_setting"
     android:orientation="vertical">
-
+    
     <LinearLayout
+        android:id="@+id/setting_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="center_vertical|left"
-        android:weightSum="6"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-        <com.facebook.login.widget.ProfilePictureView
-            android:id="@+id/setting_fb_img"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical|left"
+            android:weightSum="6"
+            android:orientation="horizontal">
+
+            <com.facebook.login.widget.ProfilePictureView
+                android:id="@+id/setting_fb_img"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="13dp"
+                />
+
+            <TextView
+                android:id="@+id/setting_fb_name"
+                android:text="@string/setting_fb_gusee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:textSize="@dimen/woney_textsize_17_5"
+                />
+
+            <LinearLayout
+                android:id="@+id/setting_fb_login_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="right"
+                >
+
+                <Button
+                    android:id="@+id/setting_fb_login"
+                    android:text="　Login"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:onClick="fbLogin"
+                    android:textSize="@dimen/woney_textsize_20"
+                    android:textColor="@color/woney_black"
+                    android:background="@drawable/btn_login"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/setting_how_it_work"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginLeft="32dp"
-            android:layout_marginRight="13dp"
+            android:onClick="clickHow"
+            android:textSize="@dimen/woney_textsize_20"
             />
 
         <TextView
-            android:id="@+id/setting_fb_name"
-            android:text="@string/setting_fb_gusee"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="left"
-            android:textSize="@dimen/woney_textsize_17_5"
+            android:text="@string/setting_tour"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="32dp"
+            android:onClick="clickTour"
+            android:textSize="@dimen/woney_textsize_20"
             />
-        
-        <LinearLayout
-            android:id="@+id/setting_fb_login_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="right"
-            >
 
-            <Button
-                android:id="@+id/setting_fb_login"
-                android:text="　Login"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="32dp"
-                android:onClick="fbLogin"
-                android:textSize="@dimen/woney_textsize_20"
-                android:textColor="@color/woney_black"
-                android:background="@drawable/btn_login"
-                />
-        </LinearLayout>
+        <TextView
+            android:text="@string/setting_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="32dp"
+            android:onClick="clickContact"
+            android:textSize="@dimen/woney_textsize_20"
+            />
 
+        <TextView
+            android:text="@string/setting_fb_fan_page"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="32dp"
+            android:onClick="clickFanpage"
+            android:textSize="@dimen/woney_textsize_20"
+            />
+
+        <TextView
+            android:text="@string/setting_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="32dp"
+            android:textSize="@dimen/woney_textsize_20"
+            android:onClick="fbLogout"
+            />
     </LinearLayout>
 
-    <TextView
-        android:text="@string/setting_how_it_work"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="32dp"
-        android:textSize="@dimen/woney_textsize_20"
-        />
+    <ScrollView
+        android:id="@+id/setting_scroll_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-    <TextView
-        android:text="@string/setting_tour"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="32dp"
-        android:onClick="clickTour"
-        android:textSize="@dimen/woney_textsize_20"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="32dp"
+            android:orientation="vertical">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:text="@string/setting_how_it_work"
+                android:textSize="@dimen/woney_textsize_20"
+                />
 
-    <TextView
-        android:text="@string/setting_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="32dp"
-        android:textSize="@dimen/woney_textsize_20"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:text="@string/how_1_title"
+                android:textColor="@color/woney_yellow"
+                android:textSize="@dimen/woney_textsize_17_5"
+                />
 
-    <TextView
-        android:text="@string/setting_fb_fan_page"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="32dp"
-        android:textSize="@dimen/woney_textsize_20"
-        />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="17dp"
+                android:src="@drawable/icon_how_1_coins"
+                />
 
-    <TextView
-        android:text="@string/setting_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="32dp"
-        android:textSize="@dimen/woney_textsize_20"
-        android:onClick="fbLogout"
-        />
-    
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:lineSpacingExtra="9dp"
+                android:text="@string/how_1_content"
+                android:textSize="@dimen/woney_textsize_10"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:text="@string/how_2_title"
+                android:textColor="@color/woney_yellow"
+                android:textSize="@dimen/woney_textsize_17_5"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="17dp"
+                android:src="@drawable/icon_how_2_luckydraw"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:lineSpacingExtra="9dp"
+                android:text="@string/how_2_content"
+                android:textSize="@dimen/woney_textsize_10"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:text="@string/how_3_title"
+                android:textColor="@color/woney_yellow"
+                android:textSize="@dimen/woney_textsize_17_5"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="17dp"
+                android:src="@drawable/icon_how_3_weekly"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:lineSpacingExtra="9dp"
+                android:text="@string/how_3_content"
+                android:textSize="@dimen/woney_textsize_10"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:text="@string/how_4_title"
+                android:textColor="@color/woney_yellow"
+                android:textSize="@dimen/woney_textsize_17_5"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="17dp"
+                android:src="@drawable/icon_how_4_cash"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="9dp"
+                android:text="@string/how_4_content"
+                android:textSize="@dimen/woney_textsize_10"
+                />
+            
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
+
