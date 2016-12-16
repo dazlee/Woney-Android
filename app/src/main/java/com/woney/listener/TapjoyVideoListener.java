@@ -6,6 +6,7 @@ import com.tapjoy.TJActionRequest;
 import com.tapjoy.TJError;
 import com.tapjoy.TJPlacement;
 import com.tapjoy.TJPlacementListener;
+import com.woney.util.TapjoyUtil;
 
 /**
  * Created by houan on 2016/12/15.
@@ -35,6 +36,10 @@ public class TapjoyVideoListener implements TJPlacementListener {
     @Override
     public void onContentDismiss(TJPlacement tjPlacement) {
         Log.d("Tapjoy", "onContentDismiss");
+        TJPlacement videoAd = TapjoyUtil.getVideoAd();
+        if (!videoAd.isContentReady()) {
+            videoAd.requestContent();
+        }
     }
 
     @Override
