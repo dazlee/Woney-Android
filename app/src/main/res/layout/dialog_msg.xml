@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog_gain_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -11,33 +10,15 @@
     android:weightSum="7">
 
     <TextView
+        android:id="@+id/dialog_text"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="5"
         android:layout_marginTop="17dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center_vertical"
-        android:text="@string/dialog_congratulations"
-        android:textSize="@dimen/woney_textsize_17_5"
-        android:textColor="@color/woney_black"
-        />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="2.5"
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/icon_congratulations"
-        />
-
-    <TextView
-        android:id="@+id/dialog_earn_text"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginBottom="17dp"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="left"
         android:gravity="center_vertical"
-        android:text="@string/dialog_woney_reward"
         android:textSize="@dimen/woney_textsize_17_5"
         android:textColor="@color/woney_black"
         />
@@ -50,10 +31,10 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/btn_white"
-        android:text="@string/dialog_collect"
+        android:text="@string/dialog_close"
         android:textSize="@dimen/woney_textsize_20"
         android:textColor="@color/woney_black"
-        android:onClick="clickCollect"
+        android:onClick="clickClose"
         android:textAllCaps="false"
         />
 </LinearLayout>

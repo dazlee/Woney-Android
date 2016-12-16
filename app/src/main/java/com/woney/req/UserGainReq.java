@@ -35,7 +35,7 @@ public class UserGainReq extends HttpReq {
         try {
             Integer retWoney = jsonObject.getInt(WoneyKey.getWoneyKey());
             if (userData.getWoney() + gainWoney == retWoney) {
-                userData.addWoney(gainWoney);
+                userData.gainWoney(gainWoney);
             } else {
                 Log.e("Gain", "Woney isn't match between local and response.");
             }

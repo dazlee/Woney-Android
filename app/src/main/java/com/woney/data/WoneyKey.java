@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.woney.R;
+import com.woney.activity.MainActivity;
+import com.woney.fragment.EarnWinnerFragment;
 
 /**
  * Created by houan on 2016/12/5.
@@ -40,8 +42,10 @@ public class WoneyKey {
     public static final int betsPerClick = 1;
     public static final int intervalShareHR = 12;
     public static final int lockWinnerSeries = 1;
+    public static final int winnerDelayAdMillsec = 2000;
 
     public static final String GAIN_KEY = "gainKey";
+    public static final String TEXT_KEY = "SHOW_KEY";
 
     public static void initRes(Context context) {
         WoneyKey.context = context;
@@ -171,4 +175,14 @@ public class WoneyKey {
     public static String getCommonWinnersKey() {
         return res.getString(R.string.api_common_winners);
     }
+
+    public static Runnable delayAdShow = new Runnable() {
+        @Override
+        public void run() {
+            if (MainActivity.getCurrentPosition() == 1) {
+                MainActivity.requestNewInterstitial();
+                EarnWinnerFragment.setAlreadyShowAd(true);
+            }
+        }
+    };
 }

@@ -1,4 +1,4 @@
-package com.woney.activity;
+package com.woney.dialog;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,12 +8,12 @@ import android.view.View;
 
 import com.woney.R;
 
-public class ContactActivity extends AppCompatActivity {
+public class ContactDialog extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact);
+        setContentView(R.layout.dialog_contact);
     }
 
     public void sendMail(View view) {
@@ -22,7 +22,7 @@ public class ContactActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void clickClose() {
+    public void clickClose(View view) {
         finish();
     }
 }

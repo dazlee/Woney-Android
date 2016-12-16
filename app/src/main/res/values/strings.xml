@@ -144,6 +144,7 @@
     <string name="dialog_contact_us">Any Questions?</string>
     <string name="dialog_mail_us">Mail us:</string>
     <string name="dialog_mail">woney123@gmail.com</string>
+    <string name="dialog_no_woney">You don\'t have enough Woney.\nEarn Woney to win BIG cash!</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_close">Close</string>
 

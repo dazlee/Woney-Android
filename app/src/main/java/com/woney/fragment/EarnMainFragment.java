@@ -20,7 +20,6 @@ import com.woney.util.RestClient;
 
 public class EarnMainFragment extends Fragment {
 
-    private static OngoingData ongoingData = null;
 
     private static TextView topPrice;
     private static TextView nextDraw;
@@ -58,7 +57,7 @@ public class EarnMainFragment extends Fragment {
     }
 
     private void loadOngoing() {
-        if (ongoingData == null) {
+        if (OngoingData.getOngoingData() == null) {
             GameOnGoingReq req = new GameOnGoingReq();
             RestClient restClient = new RestClient(req);
             restClient.execute();
@@ -68,6 +67,7 @@ public class EarnMainFragment extends Fragment {
     }
 
     public static void setupOngoingView() {
+        OngoingData ongoingData = OngoingData.getOngoingData();
         topPrice.setText(ongoingData.getFormatReward());
         nextDraw.setText(ongoingData.getFormatNextDraw());
     }
@@ -80,19 +80,10 @@ public class EarnMainFragment extends Fragment {
         luckyDraw.setText(bets);
     }
 
-    public static OngoingData getOngoingData() {
-        return ongoingData;
-    }
-
-    public static void setOngoingData(OngoingData ongoingData) {
-        EarnMainFragment.ongoingData = ongoingData;
-    }
-
     public void setupAd(View view) {
         adView = (AdView) view.findViewById(R.id.earn_ad_view);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice("F4ABFC734A9A0D1CBE419F3E2A2D97D2").build();
         adView.loadAd(adRequest);
     }
-
 }

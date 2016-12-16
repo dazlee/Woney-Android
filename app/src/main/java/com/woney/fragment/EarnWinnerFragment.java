@@ -31,6 +31,8 @@ public class EarnWinnerFragment extends Fragment {
     private static ImageView []secWinnerPhoto;
     private static UserPhotoReq []photoReqs;
 
+    private static boolean alreadyShowAd = false;
+
     public EarnWinnerFragment() {
         // Required empty public constructor
     }
@@ -128,5 +130,13 @@ public class EarnWinnerFragment extends Fragment {
 
     public static void setLastDrawData(LastDrawData lastDrawData) {
         EarnWinnerFragment.lastDrawData = lastDrawData;
+    }
+
+    public static boolean isAlreadyShowAd() {
+        return alreadyShowAd;
+    }
+
+    public static void setAlreadyShowAd(boolean alreadyShowAd) {
+        EarnWinnerFragment.alreadyShowAd = alreadyShowAd;
     }
 }

@@ -16,8 +16,18 @@ import java.util.concurrent.TimeUnit;
 
 public class OngoingData extends CoreData {
 
+    private static OngoingData ongoingData;
+
     public OngoingData() {
         super();
+    }
+
+    public static OngoingData getOngoingData() {
+        return ongoingData;
+    }
+
+    public static void setOngoingData(OngoingData ongoingData) {
+        OngoingData.ongoingData = ongoingData;
     }
 
     public void updateDataByJson(JSONObject jsonObject) {
@@ -74,5 +84,6 @@ public class OngoingData extends CoreData {
             return false;
         }
     }
+
 
 }

@@ -2,6 +2,8 @@ package com.woney.data;
 
 import android.content.ContentValues;
 
+import com.woney.util.SystemUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,5 +75,10 @@ public abstract class CoreData {
         }
 
         return jsonObject;
+    }
+
+    protected void deepSetKeyValue(String key, Object value) {
+        setValuesByKey(key, String.valueOf(value));
+        SystemUtil.saveStringValue(key, String.valueOf(value));
     }
 }

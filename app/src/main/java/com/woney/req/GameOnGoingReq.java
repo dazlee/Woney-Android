@@ -22,7 +22,7 @@ public class GameOnGoingReq extends HttpReq {
         OngoingData ongoingData = new OngoingData();
         ongoingData.updateDataByJson(jsonObject);
         MainActivity.setViewPagerTouch(ongoingData);
-        EarnMainFragment.setOngoingData(ongoingData);
+        OngoingData.setOngoingData(ongoingData);
         EarnMainFragment.setupOngoingView();
     }
 }

@@ -50,7 +50,7 @@ public class UserData extends CoreData {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (profile != null && accessToken != null) {
             // To get email and gender
-            FacebookReq.sendMeReq(accessToken);
+            FacebookReq.loadFbData(accessToken, false);
         }
     }
 
@@ -148,61 +148,55 @@ public class UserData extends CoreData {
     }
 
     public void setFacebookID(String facebookID) {
-        values.put(WoneyKey.getFacebookIDKey(), facebookID);
+        setValuesByKey(WoneyKey.getFacebookIDKey(), facebookID);
     }
 
     public void setFirstName(String firstName) {
-        values.put(WoneyKey.getFirstNameKey(), firstName);
+        setValuesByKey(WoneyKey.getFirstNameKey(), firstName);
     }
 
     public void setLastName(String lastName) {
-        values.put(WoneyKey.getLastNameKey(), lastName);
+        setValuesByKey(WoneyKey.getLastNameKey(), lastName);
     }
 
     public void setDisplayName(String displayName) {
-        values.put(WoneyKey.getDisplayNameKey(), displayName);
+        setValuesByKey(WoneyKey.getDisplayNameKey(), displayName);
     }
 
     public void setMiddleName(String middleName) {
-        values.put(WoneyKey.getMiddleNameKey(), middleName);
+        setValuesByKey(WoneyKey.getMiddleNameKey(), middleName);
     }
 
     public void setEmail(String email) {
-        values.put(WoneyKey.getEmailKey(), email);
+        setValuesByKey(WoneyKey.getEmailKey(), email);
     }
 
     public void setGender(String gender) {
-        values.put(WoneyKey.getGenderKey(), gender);
+        setValuesByKey(WoneyKey.getGenderKey(), gender);
     }
 
     public void setPhotoUrl(String photoUrl) {
-        values.put(WoneyKey.getPhotoUrlKey(), photoUrl);
+        setValuesByKey(WoneyKey.getPhotoUrlKey(), photoUrl);
     }
 
     public void setWoney(int woney) {
-        String key = WoneyKey.getWoneyKey();
-        values.put(key, woney);
-        SystemUtil.saveStringValue(key, String.valueOf(woney));
+        deepSetKeyValue(WoneyKey.getWoneyKey(), woney);
     }
 
     public void setLastDailyEarn(Date lastDailyEarn) {
-        values.put(WoneyKey.getLastDailyEarnKey(), SystemUtil.date2TzStr(lastDailyEarn));
+        deepSetKeyValue(WoneyKey.getLastDailyEarnKey(), SystemUtil.date2TzStr(lastDailyEarn));
     }
 
     public void setLastFbShare(Date lastFbShare) {
-        values.put(WoneyKey.getLastFbShareKey(), SystemUtil.date2TzStr(lastFbShare));
+        setValuesByKey(WoneyKey.getLastFbShareKey(), SystemUtil.date2TzStr(lastFbShare));
     }
 
     public void setTotalWoney(int totalWoney) {
-        String key = WoneyKey.getTotalWoneyKey();
-        values.put(key, totalWoney);
-        SystemUtil.saveStringValue(key, String.valueOf(totalWoney));
+        deepSetKeyValue(WoneyKey.getTotalWoneyKey(), totalWoney);
     }
 
     public void setBets(Integer bets) {
-        String key = WoneyKey.getBetsKey();
-        values.put(WoneyKey.getBetsKey(), bets);
-        SystemUtil.saveStringValue(key, String.valueOf(bets));
+        deepSetKeyValue(WoneyKey.getBetsKey(), bets);
     }
 
     public String getFormatLukDraw() {
@@ -313,9 +307,9 @@ public class UserData extends CoreData {
         return header;
     }
 
-    public synchronized void addWoney(Integer gain) {
+    public synchronized void gainWoney(Integer gain) {
         setWoney(getWoney() + gain);
-        setTotalWoney(getTotalWoney());
+        //setTotalWoney(getTotalWoney() + gain);
     }
 
     public synchronized void lessWoney(Integer less) {

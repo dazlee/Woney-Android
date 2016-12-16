@@ -1,9 +1,9 @@
 package com.woney.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.share.Sharer;
@@ -35,6 +36,11 @@ import com.woney.adpt.ViewPagerAdapter;
 import com.woney.data.OngoingData;
 import com.woney.data.UserData;
 import com.woney.data.WoneyKey;
+import com.woney.dialog.BackgainDialog;
+import com.woney.dialog.ContactDialog;
+import com.woney.dialog.CountdownDialog;
+import com.woney.dialog.GainDialog;
+import com.woney.dialog.WinDialog;
 import com.woney.fragment.EarnMainFragment;
 import com.woney.fragment.EarnSettingFragment;
 import com.woney.fragment.EarnWinnerFragment;
@@ -64,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
     private static TextView creditWoney;
     private static InterstitialAd interstitialAd;
     private static ShareDialog shareDialog;
+
+    private static int currentPosition;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,11 +124,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public FacebookCallback<LoginResult> connectCallback = new FacebookCallback<LoginResult>() {
+
+        private ProfileTracker profileTracker;
+
         @Override
         public void onSuccess(LoginResult loginResult) {
             Log.d("FB", "Access success");
-            AccessToken accessToken = loginResult.getAccessToken();
-            FacebookReq.loginFb(accessToken);
+            final AccessToken accessToken = loginResult.getAccessToken();
+            if (Profile.getCurrentProfile() == null) {
+                profileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                        Log.d("ProfileTracker", "Loaded user: " + currentProfile.getName());
+                        profileTracker.stopTracking();
+                        FacebookReq.loadFbData(accessToken, true);
+                    }
+                };
+            }
         }
 
         @Override
@@ -128,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onError(FacebookException error) {
-            Log.d("FB", error.toString());
+            Log.d("FB", error.getMessage());
         }
     };
 
@@ -141,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             UserGainReq req = new UserGainReq(woneyUser, WoneyKey.EARN_FB_SHARE, false, true);
             RestClient restClient = new RestClient(req);
             restClient.execute();
-            askGainActivity(WoneyKey.EARN_FB_SHARE);
+            askGainDialog(WoneyKey.EARN_FB_SHARE);
             woneyUser.setLastFbShare(new Date());
         }
 
@@ -177,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 RestClient restClient = new RestClient(req);
                 restClient.execute();
 
-                askGainActivity(amount);
+                askGainDialog(amount);
             }
         });
 
@@ -233,22 +255,20 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.clearOnTabSelectedListeners();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-                    case 0:
-                        viewPager.setCurrentItem(0);
-                        break;
-                    case 1:
-                        if (!EarnMainFragment.getOngoingData().isFirstSeries()) {
-                            viewPager.setCurrentItem(1);
-                        } else {
-                            startActivity(new Intent(MainActivity.this, WinDialog.class));
-                        }
-                        break;
-                    case 2:
-                        viewPager.setCurrentItem(2);
-                        break;
+            public void onTabSelected(final TabLayout.Tab tab) {
+                currentPosition = tab.getPosition();
+
+                OngoingData ongoingData = OngoingData.getOngoingData();
+                if (ongoingData != null && !ongoingData.isFirstSeries()) {
+                    if (!EarnWinnerFragment.isAlreadyShowAd()) {
+                        handler.postDelayed(WoneyKey.delayAdShow, WoneyKey.winnerDelayAdMillsec);
+                    }
+                } else {
+                    startActivity(new Intent(MainActivity.this, WinDialog.class));
+                    return;
                 }
+
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -296,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 // TODO
-                startActivity(new Intent(MainActivity.this, CountdownActivity.class));
+                startActivity(new Intent(MainActivity.this, CountdownDialog.class));
             }
         } else {
             fbLogin(view);
@@ -310,14 +330,18 @@ public class MainActivity extends AppCompatActivity {
                 UserGainReq gainReq = new UserGainReq(woneyUser, WoneyKey.EARN_DAILY, true, false);
                 RestClient restClient = new RestClient(gainReq);
                 restClient.execute();
-                askGainActivity(WoneyKey.EARN_DAILY);
-            } else {
-                startActivity(new Intent(MainActivity.this, BackgainActivity.class));
+                askGainDialog(WoneyKey.EARN_DAILY);
+
+                return;
             }
         } else {
-            woneyUser.setWoney(woneyUser.getWoney() + WoneyKey.EARN_DAILY);
-            setupWoneyCreditView();
+            if (woneyUser.canEarnDaylyToday()) {
+                woneyUser.setWoney(woneyUser.getWoney() + WoneyKey.EARN_DAILY);
+                setupWoneyCreditView();
+                return;
+            }
         }
+        startActivity(new Intent(MainActivity.this, BackgainDialog.class));
     }
 
     public void clickDraw(View view) {
@@ -325,8 +349,7 @@ public class MainActivity extends AppCompatActivity {
             if (woneyUser.isEnoughDraw()) {
                 woneyUser.draw();
             } else {
-                // TODO
-                Toast.makeText(getApplicationContext(), "有登入FB但錢不夠", Toast.LENGTH_LONG).show();
+                askMsgDialog(getString(R.string.dialog_no_woney));
             }
         } else {
             fbLogin(view);
@@ -354,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickContact(View view) {
-        startActivity(new Intent(MainActivity.this, ContactActivity.class));
+        startActivity(new Intent(MainActivity.this, ContactDialog.class));
     }
 
     public void clickFanpage(View view) {
@@ -376,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
     public static void setupFbLogoutView() {
         View settingView = viewPager.findViewWithTag(R.string.main_tab_setting);
         if (settingView != null) {
-            EarnSettingFragment.setupLogoutView(settingView);
+            EarnSettingFragment.setupFbLogoutView(settingView);
         }
     }
 
@@ -388,10 +411,18 @@ public class MainActivity extends AppCompatActivity {
         creditWoney.setText(WoneyKey.getStringFormated(R.string.woney_credits, woney));
     }
 
-    private void askGainActivity(Integer gain) {
-        Intent intent = new Intent(MainActivity.this, GainActivity.class);
+    private void askGainDialog(Integer gain) {
+        Intent intent = new Intent(MainActivity.this, GainDialog.class);
         Bundle bundle = new Bundle();
         bundle.putInt(WoneyKey.GAIN_KEY, gain);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    private void askMsgDialog(String content) {
+        Intent intent = new Intent(MainActivity.this, GainDialog.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(WoneyKey.TEXT_KEY, content);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -400,5 +431,9 @@ public class MainActivity extends AppCompatActivity {
         if (viewPager != null && ongoingData.isFirstSeries()) {
             viewPager.setPagingEnabled(false);
         }
+    }
+
+    public static int getCurrentPosition() {
+        return currentPosition;
     }
 }

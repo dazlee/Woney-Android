@@ -1,4 +1,4 @@
-package com.woney.activity;
+package com.woney.dialog;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,11 +9,12 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.woney.R;
+import com.woney.activity.MainActivity;
 import com.woney.util.SystemUtil;
 
 import java.util.Date;
 
-public class CountdownActivity extends AppCompatActivity {
+public class CountdownDialog extends AppCompatActivity {
 
     private static final String countdownTimeFormat = "HH:mm:dd";
     private static TextView countdownText;
@@ -25,7 +26,7 @@ public class CountdownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_countdown);
+        setContentView(R.layout.dialog_countdown);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         countdownText = (TextView) findViewById(R.id.dialog_countdown_time);

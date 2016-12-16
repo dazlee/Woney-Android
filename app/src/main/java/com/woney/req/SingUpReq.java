@@ -34,7 +34,6 @@ public class SingUpReq extends HttpReq {
         userData.finishLoadWoney();
 
         EarnMainFragment.setupBetsBtn();
-        EarnSettingFragment.setupFbLoginView();
 
         if (localGain != null && localGain != 0) {
             UserGainReq gainReq = new UserGainReq(userData, localGain);

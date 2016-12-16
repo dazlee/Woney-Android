@@ -1,4 +1,4 @@
-package com.woney.activity;
+package com.woney.dialog;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ public class WinDialog extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         TextView announceTime = (TextView) findViewById(R.id.winner_first_series_time);
-        OngoingData ongoingData = EarnMainFragment.getOngoingData();
+        OngoingData ongoingData = OngoingData.getOngoingData();
         announceTime.setText(ongoingData.getFormatFirstDraw());
     }
 

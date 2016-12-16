@@ -1,4 +1,4 @@
-package com.woney.activity;
+package com.woney.dialog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.woney.R;
 import com.woney.data.WoneyKey;
 
-public class GainActivity extends AppCompatActivity {
+public class GainDialog extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_gain);
+        setContentView(R.layout.dialog_gain);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         Bundle bundle = getIntent().getExtras();

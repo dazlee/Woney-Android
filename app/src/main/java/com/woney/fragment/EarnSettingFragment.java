@@ -2,6 +2,7 @@ package com.woney.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,12 @@ public class EarnSettingFragment extends Fragment {
             textFbName.setText(user.getDisplayName());
             pic.setProfileId(user.getFacebookID());
             loginArea.setVisibility(View.GONE);
+        } else {
+            Log.d("setupFbLoginView", "FB still not login.");
         }
     }
 
-    public static void setupLogoutView(View view) {
+    public static void setupFbLogoutView(View view) {
         textFbName.setText(view.getResources().getString(R.string.setting_fb_gusee));
         pic.setProfileId(null);
         loginArea.setVisibility(View.VISIBLE);
@@ -67,7 +70,6 @@ public class EarnSettingFragment extends Fragment {
     }
 
     public static boolean pressBack() {
-        boolean isSettingPage;
         if (scrollView != null && scrollView.getVisibility() == View.VISIBLE) {
             settingLayout.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);

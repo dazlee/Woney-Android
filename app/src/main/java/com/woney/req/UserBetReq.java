@@ -35,7 +35,7 @@ public class UserBetReq extends HttpReq {
     public static JSONObject getReqJson() {
         JSONObject jsonObject = new JSONObject();
         UserData userData = MainActivity.getUser();
-        OngoingData ongoingData = EarnMainFragment.getOngoingData();
+        OngoingData ongoingData = OngoingData.getOngoingData();
 
         try {
             jsonObject.put(WoneyKey.getGameIdKey(), ongoingData.getID());
