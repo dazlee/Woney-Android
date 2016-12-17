@@ -40,6 +40,7 @@ import com.woney.dialog.BackgainDialog;
 import com.woney.dialog.ContactDialog;
 import com.woney.dialog.CountdownDialog;
 import com.woney.dialog.GainDialog;
+import com.woney.dialog.MsgDialog;
 import com.woney.dialog.WinDialog;
 import com.woney.fragment.EarnMainFragment;
 import com.woney.fragment.EarnSettingFragment;
@@ -426,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void askMsgDialog(String content) {
-        Intent intent = new Intent(MainActivity.this, GainDialog.class);
+        Intent intent = new Intent(MainActivity.this, MsgDialog.class);
         Bundle bundle = new Bundle();
         bundle.putString(WoneyKey.TEXT_KEY, content);
         intent.putExtras(bundle);
