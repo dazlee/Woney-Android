@@ -19,6 +19,7 @@ public abstract class HttpReq {
     private String method;
 
     public abstract void onFinished(JSONObject jsonObject);
+    public void onError(){}
 
     public HttpReq(String apiPath, String method) {
         this(apiPath, method, new HashMap<String, String>(), new JSONObject());
@@ -42,6 +43,7 @@ public abstract class HttpReq {
     public final void onPreFinished(JSONObject jsonObject) {
         if (jsonObject.length() == 0) {
             Log.e("HttpReq", "Request failed!");
+            onError();
         } else {
             onFinished(jsonObject);
         }

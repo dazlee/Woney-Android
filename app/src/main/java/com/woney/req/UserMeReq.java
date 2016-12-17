@@ -6,6 +6,7 @@ import com.woney.activity.MainActivity;
 import com.woney.data.UserData;
 import com.woney.data.WoneyKey;
 import com.woney.fragment.EarnMainFragment;
+import com.woney.util.RestClient;
 
 import org.json.JSONObject;
 
@@ -33,5 +34,13 @@ public class UserMeReq extends HttpReq {
             MainActivity.setupWoneyCreditView();
             EarnMainFragment.setupBetsBtn();
         }
+    }
+
+    @Override
+    public void onError() {
+        // try signup again
+        UserData userData = MainActivity.getUser();
+        RestClient restClient = new RestClient(new SingUpReq(userData));
+        restClient.execute();
     }
 }
