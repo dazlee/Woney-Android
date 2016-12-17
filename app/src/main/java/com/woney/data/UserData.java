@@ -1,5 +1,6 @@
 package com.woney.data;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -79,6 +80,10 @@ public class UserData extends CoreData {
         return accessToken;
     }
 
+    public String getUserAccessToken() {
+        return getStringByKey(WoneyKey.getUserAccessKey());
+    }
+
     public String getFacebookID() {
         return getStringByKey(WoneyKey.getFacebookIDKey());
     }
@@ -122,6 +127,10 @@ public class UserData extends CoreData {
         return getIntegerByKey(WoneyKey.getWoneyKey());
     }
 
+    public Integer getOfflineWoney() {
+        return getIntegerByKey(WoneyKey.getOfflineWoneyKey());
+    }
+
     public Integer getTotalWoney() {
         return getIntegerByKey(WoneyKey.getTotalWoneyKey());
     }
@@ -145,6 +154,10 @@ public class UserData extends CoreData {
         } else {
             return getFirstName() + " " + getLastName();
         }
+    }
+
+    public void setUserAccessToken(String accessToken) {
+        setValuesByKey(WoneyKey.getUserAccessKey(), accessToken);
     }
 
     public void setFacebookID(String facebookID) {
@@ -180,11 +193,15 @@ public class UserData extends CoreData {
     }
 
     public void setWoney(int woney) {
-        deepSetKeyValue(WoneyKey.getWoneyKey(), woney);
+        setValuesByKey(WoneyKey.getWoneyKey(), woney);
+    }
+
+    public void setOfflineWoney(Integer offlineWoney) {
+        setValuesByKey(WoneyKey.getOfflineWoneyKey(), offlineWoney);
     }
 
     public void setLastDailyEarn(Date lastDailyEarn) {
-        deepSetKeyValue(WoneyKey.getLastDailyEarnKey(), SystemUtil.date2TzStr(lastDailyEarn));
+        setValuesByKey(WoneyKey.getLastDailyEarnKey(), SystemUtil.date2TzStr(lastDailyEarn));
     }
 
     public void setLastFbShare(Date lastFbShare) {
@@ -192,11 +209,11 @@ public class UserData extends CoreData {
     }
 
     public void setTotalWoney(int totalWoney) {
-        deepSetKeyValue(WoneyKey.getTotalWoneyKey(), totalWoney);
+        setValuesByKey(WoneyKey.getTotalWoneyKey(), totalWoney);
     }
 
     public void setBets(Integer bets) {
-        deepSetKeyValue(WoneyKey.getBetsKey(), bets);
+        setValuesByKey(WoneyKey.getBetsKey(), bets);
     }
 
     public String getFormatLukDraw() {
@@ -268,7 +285,7 @@ public class UserData extends CoreData {
     public void clearData() {
         setWoney(0);
         setBets(0);
-        SystemUtil.saveUser(this);
+        setUserAccessToken(null);
     }
 
     public void finishLoadFb() {
@@ -309,7 +326,7 @@ public class UserData extends CoreData {
 
     public synchronized void gainWoney(Integer gain) {
         setWoney(getWoney() + gain);
-        //setTotalWoney(getTotalWoney() + gain);
+        setTotalWoney(getTotalWoney() + gain);
     }
 
     public synchronized void lessWoney(Integer less) {

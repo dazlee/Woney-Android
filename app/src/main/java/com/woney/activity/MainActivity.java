@@ -331,12 +331,11 @@ public class MainActivity extends AppCompatActivity {
                 RestClient restClient = new RestClient(gainReq);
                 restClient.execute();
                 askGainDialog(WoneyKey.EARN_DAILY);
-
                 return;
             }
         } else {
             if (woneyUser.canEarnDaylyToday()) {
-                woneyUser.setWoney(woneyUser.getWoney() + WoneyKey.EARN_DAILY);
+                woneyUser.setOfflineWoney(woneyUser.getOfflineWoney() + WoneyKey.EARN_DAILY);
                 setupWoneyCreditView();
                 return;
             }
@@ -405,9 +404,16 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setupWoneyCreditView() {
         Integer woney = 0;
-        if (getUser() != null && getUser().getWoney() !=null) {
-            woney = getUser().getWoney();
+        if (getUser().isFbLogin() && getUser().getUserAccessToken() != null) {
+            if (getUser() != null && getUser().getWoney() !=null) {
+                woney = getUser().getWoney();
+            }
+        } else {
+            if (getUser() != null && getUser().getOfflineWoney() !=null) {
+                woney = getUser().getOfflineWoney();
+            }
         }
+
         creditWoney.setText(WoneyKey.getStringFormated(R.string.woney_credits, woney));
     }
 

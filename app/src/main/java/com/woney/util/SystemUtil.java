@@ -50,10 +50,10 @@ public class SystemUtil {
         editor.commit();
     }
 
-    public static void saveIntegerValue(String key, Integer value) {
+    public static void removeByKey(String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(WoneyKey.getContext());
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(key, value);
+        editor.remove(key);
         editor.commit();
     }
 

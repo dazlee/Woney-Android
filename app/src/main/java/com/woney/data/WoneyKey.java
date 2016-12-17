@@ -76,6 +76,10 @@ public class WoneyKey {
         return getStringArray(R.array.api_header_access);
     }
 
+    public static String getUserAccessKey() {
+        return res.getString(R.string.user_access_token);
+    }
+
     public static String getIsDailyEarnKey() {
         return res.getString(R.string.api_is_daily_earn);
     }
@@ -122,6 +126,10 @@ public class WoneyKey {
 
     public static String getWoneyKey() {
         return res.getString(R.string.user_woney);
+    }
+
+    public static String getOfflineWoneyKey() {
+        return res.getString(R.string.user_offline_woney);
     }
 
     public static String getTotalWoneyKey() {

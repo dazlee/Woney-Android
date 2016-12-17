@@ -24,8 +24,14 @@ public abstract class CoreData {
         this.values = new ContentValues();
     }
 
-    public void setValuesByKey(String key, String value) {
-        values.put(key, value);
+    public void setValuesByKey(String key, Object value) {
+        if (value != null) {
+            values.put(key, String.valueOf(value));
+            SystemUtil.saveStringValue(key, String.valueOf(value));
+        } else {
+            values.remove(key);
+            SystemUtil.removeByKey(key);
+        }
     }
 
     public String getStringByKey(String key) {
@@ -75,10 +81,5 @@ public abstract class CoreData {
         }
 
         return jsonObject;
-    }
-
-    protected void deepSetKeyValue(String key, Object value) {
-        setValuesByKey(key, String.valueOf(value));
-        SystemUtil.saveStringValue(key, String.valueOf(value));
     }
 }

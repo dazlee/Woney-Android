@@ -22,7 +22,6 @@
 
     <string-array name="api_header_access">
         <item>@string/user_access_token</item>
-
     </string-array>
 
     <string name="user_id">_id</string>
@@ -35,6 +34,8 @@
 
     <string name="woney_last_daily_earn">lastDailyEarn</string>
     <string name="woney_last_fb_share">lastFbShare</string>
+
+    <string name="user_offline_woney">offlineWoney</string>
 
     <string-array name="fb_user_vars">
         <item>@string/fb_user_facebook_id</item>

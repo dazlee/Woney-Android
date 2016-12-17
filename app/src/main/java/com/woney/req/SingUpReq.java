@@ -28,17 +28,19 @@ public class SingUpReq extends HttpReq {
     public void onFinished(JSONObject jsonObject) {
         Log.d("HTTP", jsonObject.toString());
 
-        Integer localGain = userData.getWoney();
+        Integer offlineGain = userData.getOfflineWoney();
 
         userData.updateWoneyDataByJson(jsonObject);
         userData.finishLoadWoney();
 
         EarnMainFragment.setupBetsBtn();
 
-        if (localGain != null && localGain != 0) {
-            UserGainReq gainReq = new UserGainReq(userData, localGain);
+        if (offlineGain != null && offlineGain != 0) {
+            UserGainReq gainReq = new UserGainReq(userData, offlineGain);
             RestClient restClient = new RestClient(gainReq);
             restClient.execute();
+
+            userData.setOfflineWoney(0);
         } else {
             MainActivity.setupWoneyCreditView();
         }
