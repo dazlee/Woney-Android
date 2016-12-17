@@ -18,6 +18,7 @@
         android:layout_marginBottom="17dp"
         android:layout_marginLeft="8dp"
         android:layout_gravity="left"
+        android:lineSpacingExtra="8dp"
         android:gravity="center_vertical"
         android:textSize="@dimen/woney_textsize_17_5"
         android:textColor="@color/woney_black"

@@ -101,7 +101,12 @@
             android:noHistory="true"
             android:taskAffinity=""
             android:theme="@style/WoneyDialog" />
-        <activity android:name=".dialog.MsgDialog"></activity>
+        <activity
+            android:name=".dialog.MsgDialog"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/WoneyDialog" />
     </application>
 
 </manifest>
