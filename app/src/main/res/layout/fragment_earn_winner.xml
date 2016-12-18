@@ -44,9 +44,10 @@
             <ImageView
                 android:id="@+id/winner_top_winner_fb_img"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="12dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/icon_fb_guest"/>
             <TextView
                 android:id="@+id/winner_top_fb_name"
@@ -114,6 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_0"
@@ -127,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_1"
@@ -158,6 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_2"
@@ -171,6 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_3"
@@ -202,6 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_4"
@@ -215,6 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_5"
@@ -246,6 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_6"
@@ -259,6 +267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_7"
@@ -290,6 +299,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_8"
@@ -303,6 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/icon_fb_guest"/>
                 <TextView
                     android:id="@+id/winner_sec_name_9"

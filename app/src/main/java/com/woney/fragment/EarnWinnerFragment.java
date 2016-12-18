@@ -12,9 +12,7 @@ import com.woney.R;
 import com.woney.data.LastDrawData;
 import com.woney.data.UserData;
 import com.woney.data.WoneyKey;
-import com.woney.req.GameLastDrawReq;
-import com.woney.req.UserPhotoReq;
-import com.woney.util.RestClient;
+import com.woney.tasks.LoadFbPhotoTask;
 
 public class EarnWinnerFragment extends Fragment {
 
@@ -29,7 +27,7 @@ public class EarnWinnerFragment extends Fragment {
 
     private static TextView []secWinnerName;
     private static ImageView []secWinnerPhoto;
-    private static UserPhotoReq []photoReqs;
+    private static LoadFbPhotoTask []secReq;
 
     private static boolean alreadyShowAd = false;
 
@@ -49,7 +47,6 @@ public class EarnWinnerFragment extends Fragment {
 
         setupView(view);
 
-        loadLastDraw();
         return view;
     }
 
@@ -67,6 +64,7 @@ public class EarnWinnerFragment extends Fragment {
 
         secWinnerName = new TextView[WoneyKey.SEC_WINNERS_COUNT];
         secWinnerPhoto = new ImageView[WoneyKey.SEC_WINNERS_COUNT];
+        secReq = new LoadFbPhotoTask[WoneyKey.SEC_WINNERS_COUNT];
         // TBD
         secWinnerName[0] = (TextView) view.findViewById(R.id.winner_sec_name_0);
         secWinnerName[1] = (TextView) view.findViewById(R.id.winner_sec_name_1);
@@ -90,12 +88,6 @@ public class EarnWinnerFragment extends Fragment {
         secWinnerPhoto[9] = (ImageView) view.findViewById(R.id.winner_sec_pic_9);
     }
 
-    private void loadLastDraw() {
-        GameLastDrawReq req = new GameLastDrawReq();
-        RestClient restClient = new RestClient(req);
-        restClient.execute();
-    }
-
     public static void setupLastDrawView() {
         if (lastDrawData != null) {
             UserData firstUser = lastDrawData.getFirstWinner();
@@ -105,20 +97,16 @@ public class EarnWinnerFragment extends Fragment {
             secReward.setText(lastDrawData.getFormatedSecReward());
 
             firstWinName.setText(firstUser.getShowName());
-            UserPhotoReq firstReq = new UserPhotoReq(firstUser.getPhotoUrl(), firstWinPhoto);
-            firstReq.execute();
+            LoadFbPhotoTask firstReq = new LoadFbPhotoTask(firstWinPhoto);
+            firstReq.execute(firstUser.getFacebookID());
 
             UserData[] secWinners = lastDrawData.getCommonWinners();
-            photoReqs = new UserPhotoReq[secWinners.length];
-            if (secWinners.length <= secWinnerName.length) {
-                for (int i=0; i<secWinners.length; i++) {
-                    secWinnerName[i].setText(secWinners[i].getShowName());
 
-                    String urlStr = secWinners[i].getPhotoUrl();
-                    if (urlStr != null && urlStr != "") {
-                        photoReqs[i] = new UserPhotoReq(secWinners[i].getPhotoUrl(), secWinnerPhoto[i]);
-                        photoReqs[i].execute();
-                    }
+            for (int i=0; i<secWinnerName.length; i++) {
+                if (secWinners.length > i) {
+                    secWinnerName[i].setText(secWinners[i].getShowName());
+                    secReq[i] = new LoadFbPhotoTask(secWinnerPhoto[i]);
+                    secReq[i].execute(secWinners[i].getFacebookID());
                 }
             }
         }
@@ -139,4 +127,11 @@ public class EarnWinnerFragment extends Fragment {
     public static void setAlreadyShowAd(boolean alreadyShowAd) {
         EarnWinnerFragment.alreadyShowAd = alreadyShowAd;
     }
+
+    public Runnable loadFbPicture = new Runnable() {
+        @Override
+        public void run() {
+
+        }
+    };
 }

@@ -1,6 +1,5 @@
 package com.woney.data;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -9,7 +8,7 @@ import com.woney.R;
 import com.woney.activity.MainActivity;
 import com.woney.fragment.EarnMainFragment;
 import com.woney.req.FacebookReq;
-import com.woney.timer.SyncDrawTask;
+import com.woney.tasks.SyncDrawTask;
 import com.woney.util.SystemUtil;
 
 import org.json.JSONObject;
@@ -23,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by houan on 2016/12/3.
@@ -118,7 +116,7 @@ public class UserData extends CoreData {
 
     private String getPhotoUrlByID() {
         if (profile != null) {
-            return "http://graph.facebook.com/" + profile.getId() + "/picture?type=large";
+            return WoneyKey.loadFBPictureUrl(profile.getId());
         }
         return null;
     }

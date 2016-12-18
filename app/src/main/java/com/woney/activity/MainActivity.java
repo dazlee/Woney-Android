@@ -102,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
         creditWoney = (TextView) findViewById(R.id.text_woney_credits);
 
         initAd();
-        loadUserData();
-        setupTapjoy();
-        setupWoneyCreditView();
     }
 
     @Override
@@ -133,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Tapjoy.onActivityStart(this);
+        loadUserData();
+        setupTapjoy();
         loadOnGoing();
         loadLastDraw();
     }
@@ -390,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("F4ABFC734A9A0D1CBE419F3E2A2D97D2")
+                //.addTestDevice("F4ABFC734A9A0D1CBE419F3E2A2D97D2")
                 .build();
 
         interstitialAd.loadAd(adRequest);

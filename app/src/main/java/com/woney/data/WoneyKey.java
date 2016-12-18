@@ -24,6 +24,9 @@ public class WoneyKey {
     public static final String FB_FAN_PAGE = "https://www.facebook.com/woneyglobe";
     public static final String FB_FAN_PAGE_ID = "176487632824904";
 
+    public static final String fbUrlFront = "https://graph.facebook.com/";
+    public static final String fbUrlEnd = "/picture?type=large";
+
     public static final String NET_METHOD_GET = "GET";
     public static final String NET_METHOD_POST = "POST";
 
@@ -193,4 +196,8 @@ public class WoneyKey {
             }
         }
     };
+
+    public static String loadFBPictureUrl(String facebookID) {
+        return fbUrlFront + facebookID + fbUrlEnd;
+    }
 }

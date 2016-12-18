@@ -1,7 +1,6 @@
-package com.woney.timer;
+package com.woney.tasks;
 
 import com.woney.activity.MainActivity;
-import com.woney.data.UserData;
 import com.woney.req.UserBetReq;
 import com.woney.util.RestClient;
 
