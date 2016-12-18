@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         Tapjoy.onActivityStart(this);
         loadUserData();
         setupTapjoy();
+        setupWoneyCreditView();
         loadOnGoing();
         loadLastDraw();
     }
