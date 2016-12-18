@@ -92,7 +92,6 @@ public class HomeActivity extends AppCompatActivity implements TJConnectListener
     @Override
     protected void onStart() {
         super.onStart();
-        Tapjoy.onActivityStart(this);
     }
 
     @Override

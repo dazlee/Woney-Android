@@ -112,9 +112,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Tapjoy.getCurrencyBalance(new TJGetCurrencyBalanceListener() {
+            @Override
+            public void onGetCurrencyBalanceResponse(String currencyName, int balance) {
+                Log.i("Tapjoy", "getCurrencyBalance returned " + currencyName + ":" + balance);
+            }
+
+            @Override
+            public void onGetCurrencyBalanceResponseFailure(String error) {
+                Log.i("Tapjoy", "getCurrencyBalance error:  " + error);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Tapjoy.onActivityStart(this);
+    }
+
+    @Override
     protected void onStop() {
-        super.onStop();
         Tapjoy.onActivityStop(this);
+        super.onStop();
     }
 
     @Override
@@ -196,23 +218,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onEarnedCurrency(String currencyName, int amount) {
                 Log.d("Tapjoy", "Currency name: " + currencyName + ", " + "Balance: " + amount);
-                UserGainReq req = new UserGainReq(MainActivity.getUser(), amount);
-                RestClient restClient = new RestClient(req);
-                restClient.execute();
+
+                UserData user = MainActivity.getUser();
+                if (user.isFbLogin()) {
+                    UserGainReq req = new UserGainReq(user, amount);
+                    RestClient restClient = new RestClient(req);
+                    restClient.execute();
+                } else {
+                    user.setOfflineWoney(user.getOfflineWoney() + amount);
+
+                    // update setupWoneyCreditView
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setupWoneyCreditView();
+                        }
+                    });
+                }
 
                 askGainDialog(amount);
-            }
-        });
-
-        Tapjoy.getCurrencyBalance(new TJGetCurrencyBalanceListener() {
-            @Override
-            public void onGetCurrencyBalanceResponse(String currencyName, int balance) {
-                Log.i("Tapjoy", "getCurrencyBalance returned " + currencyName + ":" + balance);
-            }
-
-            @Override
-            public void onGetCurrencyBalanceResponseFailure(String error) {
-                Log.i("Tapjoy", "getCurrencyBalance error:  " + error);
             }
         });
     }

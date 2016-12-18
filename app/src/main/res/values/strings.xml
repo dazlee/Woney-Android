@@ -15,6 +15,7 @@
         <item>@string/user_total_woney</item>
         <item>@string/user_won_times</item>
         <item>@string/user_bets</item>
+        <item>@string/user_offline_woney</item>
         <item>@string/user_access_token</item>
         <item>@string/woney_last_daily_earn</item>
         <item>@string/woney_last_fb_share</item>
