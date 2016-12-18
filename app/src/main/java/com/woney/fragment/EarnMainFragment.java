@@ -43,9 +43,14 @@ public class EarnMainFragment extends Fragment {
 
         setupView(view);
         setupAd(view);
-        loadOngoing();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupOngoingView();
     }
 
     private void setupView(View view) {
@@ -57,19 +62,15 @@ public class EarnMainFragment extends Fragment {
     }
 
     private void loadOngoing() {
-        if (OngoingData.getOngoingData() == null) {
-            GameOnGoingReq req = new GameOnGoingReq();
-            RestClient restClient = new RestClient(req);
-            restClient.execute();
-        } else {
-            setupOngoingView();
-        }
+        setupOngoingView();
     }
 
     public static void setupOngoingView() {
         OngoingData ongoingData = OngoingData.getOngoingData();
-        topPrice.setText(ongoingData.getFormatReward());
-        nextDraw.setText(ongoingData.getFormatNextDraw());
+        if (ongoingData != null) {
+            topPrice.setText(ongoingData.getFormatReward());
+            nextDraw.setText(ongoingData.getFormatNextDraw());
+        }
     }
 
     public static void setupBetsBtn() {

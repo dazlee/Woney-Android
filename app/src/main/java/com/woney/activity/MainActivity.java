@@ -47,6 +47,8 @@ import com.woney.fragment.EarnSettingFragment;
 import com.woney.fragment.EarnWinnerFragment;
 import com.woney.fragment.FbLogoutDialog;
 import com.woney.req.FacebookReq;
+import com.woney.req.GameLastDrawReq;
+import com.woney.req.GameOnGoingReq;
 import com.woney.req.UserGainReq;
 import com.woney.util.RestClient;
 import com.woney.util.SystemUtil;
@@ -131,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Tapjoy.onActivityStart(this);
+        loadOnGoing();
+        loadLastDraw();
     }
 
     @Override
@@ -462,6 +466,17 @@ public class MainActivity extends AppCompatActivity {
         if (viewPager != null && ongoingData.isFirstSeries()) {
             viewPager.setPagingEnabled(false);
         }
+    }
+
+    private void loadOnGoing () {
+        GameOnGoingReq req = new GameOnGoingReq();
+        RestClient restClient = new RestClient(req);
+        restClient.execute();
+    }
+    private void loadLastDraw() {
+        GameLastDrawReq req = new GameLastDrawReq();
+        RestClient restClient = new RestClient(req);
+        restClient.execute();
     }
 
     public static int getCurrentPosition() {
