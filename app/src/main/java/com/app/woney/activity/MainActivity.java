@@ -335,9 +335,7 @@ public class MainActivity extends AppCompatActivity {
             if (woneyUser.canShareFb()) {
                 if (shareDialog.canShow(ShareLinkContent.class)) {
                     ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                            .setContentTitle("I use an app claaed EARN CASH")
-                            .setContentDescription("Share app link")
-                            .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
+                            .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.app.woney"))
                             .build();
                     shareDialog.registerCallback(callbackManager, shareCallback);
                     shareDialog.show(linkContent);
