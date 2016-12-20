@@ -293,8 +293,10 @@ public class MainActivity extends AppCompatActivity {
                         handler.postDelayed(WoneyKey.delayAdShow, WoneyKey.winnerDelayAdMillsec);
                     }
                 } else {
-                    startActivity(new Intent(MainActivity.this, WinDialog.class));
-                    return;
+                    if (currentPosition == 1) {
+                        startActivity(new Intent(MainActivity.this, WinDialog.class));
+                        return;
+                    }
                 }
 
                 viewPager.setCurrentItem(tab.getPosition());
