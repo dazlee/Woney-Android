@@ -92,6 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/earn_draw_offer_wall"
             android:gravity="center_horizontal"
             android:onClick="clickWall"
             android:orientation="vertical">
@@ -129,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/earn_draw_watch_ad"
             android:gravity="center_horizontal"
             android:onClick="clickWatch"
             android:orientation="vertical">
@@ -175,6 +177,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/earn_draw_fb_share"
             android:gravity="center_horizontal"
             android:onClick="clickFbShare"
             android:orientation="vertical">
@@ -212,6 +215,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/earn_draw_daily_earn"
             android:gravity="center_horizontal"
             android:onClick="clickDailyEarn"
             android:orientation="vertical">

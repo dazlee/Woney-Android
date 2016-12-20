@@ -83,12 +83,12 @@
     <string name="api_first_winner">firstWinner</string>
     <string name="api_common_winners">commonWinners</string>
 
-    <string name="tour_page_1_title">Join Woney</string>
-    <string name="tour_page_1">Gather BIG cash with the whole world.</string>
-    <string name="tour_page_2_title">Earn Woney credits to\nplay lucky draw</string>
-    <string name="tour_page_2">Join more  will get more chance to win.</string>
-    <string name="tour_page_3_title">Lucky draw complete weekly.</string>
-    <string name="tour_page_3">Easily to win BIG cash.</string>
+    <string name="tour_page_1_title">Join Woney.</string>
+    <string name="tour_page_1">Play for free.</string>
+    <string name="tour_page_2_title">Earn Woney credits to play.</string>
+    <string name="tour_page_2">It\'s fun and easy.</string>
+    <string name="tour_page_3_title">Each game complete weekly.</string>
+    <string name="tour_page_3">You may win BIG.</string>
     <string name="tour_btn_start">Start</string>
 
     <string name="woney_credits">Woney Credits：%1$s</string>
@@ -96,7 +96,7 @@
     <string name="title_activity_facebook">FacebookActivity</string>
 
     <string name="main_tab_key">tag_key</string>
-    <string name="main_tab_main">Earn/Bet</string>
+    <string name="main_tab_main">Earn/Play</string>
     <string name="main_tab_winner">Winner</string>
     <string name="main_tab_setting">Setting</string>
     <string name="title_activity_tour">TourActivity</string>
@@ -104,9 +104,9 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="earn_top_paypal">Estimate top prize:</string>
-    <string name="earn_top_draw">Next draw in %1$d days %2$d hrs</string>
-    <string name="earn_top_btn_luk">Lucky Draw: %1$d</string>
-    <string name="earn_top_woneybet">10 Woney \n/ bet</string>
+    <string name="earn_top_draw">Next game in %1$d days %2$d hrs</string>
+    <string name="earn_top_btn_luk">Play: %1$d</string>
+    <string name="earn_top_woneybet">10 Woney \n/ play</string>
 
     <string name="earn_offer_wall">OFFER WALL</string>
     <string name="earn_offer_wall_credits">+50~5000 credits</string>
@@ -151,11 +151,11 @@
     <string name="dialog_close">Close</string>
 
     <string name="how_1_title">1. Earn Woney Credits</string>
-    <string name="how_1_content">Click OFFER WALL, WATCH ADS, FB SHARE, and DAILT EARN to\nearn Woney easily. Gather big cash with the whole, and get\nchange to win PayPal cash.</string>
-    <string name="how_2_title">2. Lucky Draw</string>
-    <string name="how_2_content">Play Lucky draw with Woney credits. Join more will get more\nchange to win.</string>
-    <string name="how_3_title">3. Lucky Draw Complete Weekly</string>
-    <string name="how_3_content">Draw results announce at 9pm every Sunday (GMT+5.5).\nWill have one top prize and 10 second prize winners.</string>
-    <string name="how_4_title">4. Cash Out</string>
+    <string name="how_1_content">Click OFFER WALL, WATCH ADS, FB SHARE, and DAILT EARN to\nearn Woney easily.</string>
+    <string name="how_2_title">2. Play weakly games</string>
+    <string name="how_2_content">Earn Woney credits to play. The more you play, the more chance\nyou win.</string>
+    <string name="how_3_title">3. Each game complete weekly</string>
+    <string name="how_3_content">Game winners announce at 9pm every Sunday (GMT+5.5).\nWill have one top prize and 10 second prize winners.</string>
+    <string name="how_4_title">4. Cash out</string>
     <string name="how_4_content">We will inform the winner via facebook massenger.\nWinners should provide PayPal account in 30 days to cash out. If the winner don\'t provide the PayPal account in 30 days, will be\ndisqualified to get prize. \nPayouts may take 30 to 45 days and will be paid directly to winners\' PayPal accounts.</string>
 </resources>
