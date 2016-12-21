@@ -19,7 +19,7 @@ public class WoneyKey {
     public static final boolean devMode = false;
 
     public static final String DEV_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:3000";
-    public static final String PROD_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:3000";
+    public static final String PROD_URL = "http://ec2-54-250-151-131.ap-northeast-1.compute.amazonaws.com:80";
 
     public static final String PLAY_URL = "https://play.google.com/store/apps/details?id=com.app.woney";
 

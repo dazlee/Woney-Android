@@ -2,8 +2,8 @@
     <string name="app_name">Woney</string>
     <string name="facebook_app_id">201701940275937</string>
     <string name="tapjoy_sdkKey">93wQa0NzRRajWv-k4Bl6QwECctEoatezPMS4xolz9c4HsszGPY1s5o5ykTo0</string>
-    <string name="banner_ad_unit_id">ca-app-pub-6886675595859944/4484191111</string>
-    <string name="gad_ad_unit_id">ca-app-pub-6886675595859944/8480411910</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5477140292908800/3119522179</string>
+    <string name="gad_ad_unit_id">ca-app-pub-5477140292908800/4596255379</string>
 
     <string name="sys_is_first">FIRST_TIME_START</string>
 
