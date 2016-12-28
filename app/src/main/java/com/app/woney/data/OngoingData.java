@@ -73,7 +73,7 @@ public class OngoingData extends CoreData {
 
     public String getFormatFirstDraw() {
         Date endTime = getEndTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm ('GMT'Z) 'on' yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm ('GMT'Z) 'on' MM-dd-yyyy");
         return sdf.format(endTime);
     }
 
@@ -84,6 +84,4 @@ public class OngoingData extends CoreData {
             return false;
         }
     }
-
-
 }

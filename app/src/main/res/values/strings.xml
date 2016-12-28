@@ -109,13 +109,13 @@
     <string name="earn_top_woneybet">10 Woney \n/ play</string>
 
     <string name="earn_offer_wall">OFFER WALL</string>
-    <string name="earn_offer_wall_credits">+50~5000 credits</string>
+    <string name="earn_offer_wall_credits">+1~100 credits</string>
     <string name="earn_watch_ads">WATCH ADS</string>
-    <string name="earn_watch_ads_credits">+50 credits</string>
+    <string name="earn_watch_ads_credits">+2 credits</string>
     <string name="earn_fb_share">FB SHARE</string>
-    <string name="earn_fb_share_credits">+50 credits</string>
+    <string name="earn_fb_share_credits">+2 credits</string>
     <string name="earn_daily_earn">DAILY EARN</string>
-    <string name="earn_daily_earn_credits">+20 credits</string>
+    <string name="earn_daily_earn_credits">+1 credits</string>
 
     <string name="winner_winner">%1$s Top prize winner:</string>
     <string name="winner_sec_price">Second prize: %1$d /each</string>
@@ -124,7 +124,7 @@
 
     <string name="winner_dialog_text">The winners will be announced at</string>
 
-    <string name="setting_fb_gusee">Guess</string>
+    <string name="setting_fb_gusee">Guest</string>
     <string name="setting_fb_login">Login</string>
     <string name="setting_how_it_work">How it works</string>
     <string name="setting_tour">Tour</string>
@@ -151,11 +151,11 @@
     <string name="dialog_close">Close</string>
 
     <string name="how_1_title">1. Earn Woney Credits</string>
-    <string name="how_1_content">Click OFFER WALL, WATCH ADS, FB SHARE, and DAILT EARN to\nearn Woney easily.</string>
+    <string name="how_1_content">Click OFFER WALL, WATCH ADS, FB SHARE, and DAILY EARN to\nearn Woney easily.</string>
     <string name="how_2_title">2. Play weakly games</string>
     <string name="how_2_content">Earn Woney credits to play. The more you play, the more chance\nyou win.</string>
     <string name="how_3_title">3. Each game complete weekly</string>
     <string name="how_3_content">Game winners announce at 9pm every Sunday (GMT+5.5).\nWill have one top prize and 10 second prize winners.</string>
     <string name="how_4_title">4. Cash out</string>
-    <string name="how_4_content">We will inform the winner via facebook massenger.\nWinners should provide PayPal account in 30 days to cash out. If the winner don\'t provide the PayPal account in 30 days, will be\ndisqualified to get prize. \nPayouts may take 30 to 45 days and will be paid directly to winners\' PayPal accounts.</string>
+    <string name="how_4_content">We will inform the winner via facebook messenger.\nWinners should provide PayPal account in 30 days to cash out. If the winner don\'t provide the PayPal account in 30 days, will be\ndisqualified to get prize. \nPayouts may take 30 to 45 days and will be paid directly to winners\' PayPal accounts.</string>
 </resources>

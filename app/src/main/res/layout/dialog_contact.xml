@@ -59,7 +59,7 @@
         android:text="@string/dialog_close"
         android:textSize="@dimen/woney_textsize_20"
         android:textColor="@color/woney_black"
-        android:onClick="clickClose"
+        android:onClick="clickOK"
         android:textAllCaps="false"
         />
 </LinearLayout>

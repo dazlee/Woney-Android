@@ -70,12 +70,16 @@ public class EarnSettingFragment extends Fragment {
     }
 
     public static boolean pressBack() {
-        if (scrollView != null && scrollView.getVisibility() == View.VISIBLE) {
+        if (isHowItWorkShow()) {
             settingLayout.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
             return false;
         } else {
             return true;
         }
+    }
+
+    public static boolean isHowItWorkShow() {
+        return scrollView != null && scrollView.getVisibility() == View.VISIBLE ? true : false;
     }
 }

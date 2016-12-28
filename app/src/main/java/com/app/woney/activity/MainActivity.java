@@ -9,7 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -287,16 +289,15 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(final TabLayout.Tab tab) {
                 currentPosition = tab.getPosition();
 
-                OngoingData ongoingData = OngoingData.getOngoingData();
-                if (ongoingData != null && !ongoingData.isFirstSeries()) {
-                    if (!EarnWinnerFragment.isAlreadyShowAd()) {
-                        handler.postDelayed(WoneyKey.delayAdShow, WoneyKey.winnerDelayAdMillsec);
-                    }
-                } else {
-                    if (currentPosition == 1) {
-                        startActivity(new Intent(MainActivity.this, WinDialog.class));
+                if (currentPosition == 1) {
+                    OngoingData ongoingData = OngoingData.getOngoingData();
+                    if (ongoingData != null && ongoingData.isFirstSeries()) {
                         return;
                     }
+                }
+
+                if (currentPosition == 2 && EarnSettingFragment.isHowItWorkShow()) {
+                    onBackPressed();
                 }
 
                 viewPager.setCurrentItem(tab.getPosition());
@@ -310,6 +311,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+        LinearLayout winnerTab = ((LinearLayout) tabLayout.getChildAt(0));
+        Log.d("Main", "Tab count: " + winnerTab.getChildCount());
+        winnerTab.getChildAt(1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OngoingData ongoingData = OngoingData.getOngoingData();
+                if (ongoingData != null && !ongoingData.isFirstSeries()) {
+                    if (!EarnWinnerFragment.isAlreadyShowAd()) {
+                        handler.postDelayed(WoneyKey.delayAdShow, WoneyKey.winnerDelayAdMillsec);
+                    }
+                } else {
+                    startActivity(new Intent(MainActivity.this, WinDialog.class));
+                    return;
+                }
             }
         });
     }
@@ -353,23 +370,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickDailyEarn(View view) throws Exception {
-        if (woneyUser.isFbLogin()) {
-            if (woneyUser.canEarnDaylyToday()) {
+        if (woneyUser.canEarnDaylyToday()) {
+            if (woneyUser.isFbLogin()) {
                 Log.d("DailyEarn", "Earn : " + WoneyKey.EARN_DAILY);
                 UserGainReq gainReq = new UserGainReq(woneyUser, WoneyKey.EARN_DAILY, true, false);
                 RestClient restClient = new RestClient(gainReq);
                 restClient.execute();
-                askGainDialog(WoneyKey.EARN_DAILY);
-                return;
-            }
-        } else {
-            if (woneyUser.canEarnDaylyToday()) {
+            } else {
                 woneyUser.setOfflineWoney(woneyUser.getOfflineWoney() + WoneyKey.EARN_DAILY);
                 setupWoneyCreditView();
-                return;
             }
+            askGainDialog(WoneyKey.EARN_DAILY);
+        } else {
+            startActivity(new Intent(MainActivity.this, BackgainDialog.class));
         }
-        startActivity(new Intent(MainActivity.this, BackgainDialog.class));
     }
 
     public void clickDraw(View view) {

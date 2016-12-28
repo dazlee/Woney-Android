@@ -34,9 +34,9 @@ public class CountdownDialog extends AppCompatActivity {
         handler = new Handler();
         if (endTime == null) {
             endTime = MainActivity.getUser().getFbShareUnlockTime();
-            handler.removeCallbacks(updateTimer);
-            handler.postDelayed(updateTimer, 0);
         }
+        handler.removeCallbacks(updateTimer);
+        handler.postDelayed(updateTimer, 0);
     }
 
     private Runnable updateTimer = new Runnable() {

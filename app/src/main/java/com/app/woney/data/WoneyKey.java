@@ -40,9 +40,9 @@ public class WoneyKey {
     public static final String API_GAME_LASTDRAW = "/api/games/lastDraw";
 
     public static final int SEC_WINNERS_COUNT = 10;
-    public static final int EARN_DAILY = 20;
-    public static final int EARN_FB_SHARE = 50;
-    public static final int EARN_WATCH_AD = 50;
+    public static final int EARN_DAILY = 1;
+    public static final int EARN_FB_SHARE = 2;
+    public static final int EARN_WATCH_AD = 2;
     public static final int woneyPerBets = 10;
     public static final int betsPerClick = 1;
     public static final int intervalShareHR = 12;
