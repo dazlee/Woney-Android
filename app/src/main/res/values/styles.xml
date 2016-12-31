@@ -51,6 +51,15 @@
         <item name="android:textColor">@color/woney_gray</item>
         <item name="android:textSize">@dimen/woney_textsize_10</item>
     </style>
+    <style name="EarnOptMessageBubble">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/woney_textsize_10</item>
+        <item name="android:background">@color/woney_light_gray</item>
+        <item name="android:paddingTop">@dimen/message_bubble_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/message_bubble_padding_vertical</item>
+        <item name="android:paddingLeft">@dimen/message_bubble_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/message_bubble_padding_horizontal</item>
+    </style>
 
     <style name="StyledIndicators" parent="@style/FullscreenTheme">
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>

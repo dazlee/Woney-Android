@@ -110,6 +110,7 @@
 
     <string name="earn_offer_wall">OFFER WALL</string>
     <string name="earn_offer_wall_credits">+1~100 credits</string>
+    <string name="earn_offer_wall_preparing">Preparing</string>
     <string name="earn_watch_ads">WATCH ADS</string>
     <string name="earn_watch_ads_credits">+2 credits</string>
     <string name="earn_fb_share">FB SHARE</string>

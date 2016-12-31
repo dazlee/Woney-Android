@@ -123,6 +123,14 @@
                 android:layout_height="wrap_content"
                 style="@style/EarnOptCreditsText"
                 />
+            <TextView
+                android:id="@+id/earn_offer_wall_status"
+                android:text="@string/earn_offer_wall_preparing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EarnOptMessageBubble"
+                android:visibility="gone"
+                />
         </LinearLayout>
         
         <LinearLayout
@@ -164,6 +172,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/EarnOptCreditsText"
+                />
+            <TextView
+                android:id="@+id/earn_watch_status"
+                android:text="@string/earn_offer_wall_preparing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/EarnOptMessageBubble"
+                android:visibility="gone"
                 />
         </LinearLayout>
     </LinearLayout>

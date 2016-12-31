@@ -10,6 +10,9 @@
 
     <dimen name="main_top_woney_credits">20sp</dimen>
 
+    <dimen name="message_bubble_padding_vertical">2dp</dimen>
+    <dimen name="message_bubble_padding_horizontal">10dp</dimen>
+
     <dimen name="woney_textsize_10">10sp</dimen>
     <dimen name="woney_textsize_12_5">12.5sp</dimen>
     <dimen name="woney_textsize_17_5">17.5sp</dimen>

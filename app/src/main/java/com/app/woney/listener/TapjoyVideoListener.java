@@ -2,6 +2,7 @@ package com.app.woney.listener;
 
 import android.util.Log;
 
+import com.app.woney.fragment.EarnMainFragment;
 import com.tapjoy.TJActionRequest;
 import com.tapjoy.TJError;
 import com.tapjoy.TJPlacement;
@@ -13,19 +14,26 @@ import com.app.woney.util.TapjoyUtil;
  */
 
 public class TapjoyVideoListener implements TJPlacementListener {
+    public static boolean isReady = false;
     @Override
     public void onRequestSuccess(TJPlacement tjPlacement) {
         Log.d("Tapjoy", "onRequestSuccess");
+        this.isReady = false;
+        EarnMainFragment.updateButtonLayout();
     }
 
     @Override
     public void onRequestFailure(TJPlacement tjPlacement, TJError tjError) {
         Log.d("Tapjoy", "onRequestFailure");
+        this.isReady = false;
+        EarnMainFragment.updateButtonLayout();
     }
 
     @Override
     public void onContentReady(TJPlacement tjPlacement) {
         Log.d("Tapjoy", "onContentReady");
+        this.isReady = true;
+        EarnMainFragment.updateButtonLayout();
     }
 
     @Override
@@ -36,6 +44,9 @@ public class TapjoyVideoListener implements TJPlacementListener {
     @Override
     public void onContentDismiss(TJPlacement tjPlacement) {
         Log.d("Tapjoy", "onContentDismiss");
+        this.isReady = false;
+        EarnMainFragment.updateButtonLayout();
+
         TJPlacement videoAd = TapjoyUtil.getVideoAd();
         if (!videoAd.isContentReady()) {
             videoAd.requestContent();

@@ -12,5 +12,6 @@
     <color name="woney_yellow">#ffeb3b</color>
     <color name="woney_white">#ffffff</color>
     <color name="woney_gray">#808080</color>
+    <color name="woney_light_gray">#a8a8a8</color>
     <color name="woney_black">#000000</color>
 </resources>
