@@ -104,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
         creditWoney = (TextView) findViewById(R.id.text_woney_credits);
 
         initAd();
+
+        // move this initial from onStart because it will cause some weird race condition
+        // the reason is that when tapjoy activity is destroyed, android will call onStart, which will call loadUserData
+        // at the same time, other thread is using "profile" to checking if the user is logged in.
+        // sometimes user is logged in, sometimes is not. so move load use data to onCreate
+        loadUserData();
     }
 
     @Override
@@ -132,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Tapjoy.onActivityStart(this);
-        loadUserData();
         setupTapjoy();
         setupWoneyCreditView();
         loadOnGoing();

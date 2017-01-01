@@ -18,8 +18,8 @@ public class TapjoyVideoListener implements TJPlacementListener {
     @Override
     public void onRequestSuccess(TJPlacement tjPlacement) {
         Log.d("Tapjoy", "onRequestSuccess");
-        this.isReady = false;
-        EarnMainFragment.updateButtonLayout();
+        //this.isReady = false;
+        //EarnMainFragment.updateButtonLayout();
     }
 
     @Override
