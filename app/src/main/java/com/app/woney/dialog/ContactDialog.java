@@ -22,7 +22,7 @@ public class ContactDialog extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void clickClose(View view) {
+    public void clickOK(View view) {
         finish();
     }
 }

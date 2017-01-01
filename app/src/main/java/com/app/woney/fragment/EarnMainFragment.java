@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
@@ -37,8 +38,11 @@ public class EarnMainFragment extends Fragment {
 
     private static AdView adView;
 
+    private static EarnMainFragment self;
+
     public EarnMainFragment() {
         // Required empty public constructor
+        self = this;
     }
 
     @Override
@@ -90,7 +94,7 @@ public class EarnMainFragment extends Fragment {
         }
     }
 
-    private static Handler mHandler = new Handler() {
+    private static Handler mHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
@@ -145,7 +149,9 @@ public class EarnMainFragment extends Fragment {
     }
 
     public static void updateButtonLayout() {
-        mHandler.sendMessage(new Message());
+        if (self != null) {
+            mHandler.sendMessage(new Message());
+        }
     }
 
     public static void setupBetsBtn() {
