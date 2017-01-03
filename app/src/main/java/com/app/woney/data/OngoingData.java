@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -74,6 +75,7 @@ public class OngoingData extends CoreData {
     public String getFormatFirstDraw() {
         Date endTime = getEndTime();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm ('GMT'Z) 'on' MM-dd-yyyy");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
         return sdf.format(endTime);
     }
 
