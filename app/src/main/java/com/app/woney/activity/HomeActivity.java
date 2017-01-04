@@ -23,8 +23,6 @@ public class HomeActivity extends AppCompatActivity implements TJConnectListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
-
         initView();
 
         initTapjoy();
