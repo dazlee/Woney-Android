@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (currentPosition == 1) {
                     OngoingData ongoingData = OngoingData.getOngoingData();
-                    if (ongoingData != null && ongoingData.isFirstSeries()) {
+                    if (ongoingData == null || ongoingData.isFirstSeries()) {
                         return;
                     }
                 }

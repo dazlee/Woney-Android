@@ -7,6 +7,7 @@
     android:background="@color/woney_white">
 
     <TextView
+        android:id="@+id/winner_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

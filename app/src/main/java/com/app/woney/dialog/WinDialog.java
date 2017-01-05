@@ -20,8 +20,15 @@ public class WinDialog extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         TextView announceTime = (TextView) findViewById(R.id.winner_first_series_time);
+        TextView winnerTitleTextView = (TextView) findViewById(R.id.winner_title);
         OngoingData ongoingData = OngoingData.getOngoingData();
-        announceTime.setText(ongoingData.getFormatFirstDraw());
+        if (ongoingData != null) {
+            winnerTitleTextView.setVisibility(View.VISIBLE);
+            announceTime.setText(ongoingData.getFormatFirstDraw());
+        } else {
+            winnerTitleTextView.setVisibility(View.INVISIBLE);
+            announceTime.setText("Loading winner information...");
+        }
     }
 
     public void clickOK(View view) {
