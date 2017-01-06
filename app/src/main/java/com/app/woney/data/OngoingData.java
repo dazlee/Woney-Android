@@ -74,7 +74,7 @@ public class OngoingData extends CoreData {
 
     public String getFormatFirstDraw() {
         Date endTime = getEndTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm (z) 'on' MM-dd-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm (z) 'on' dd-MM-yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 
         return sdf.format(endTime);
