@@ -7,15 +7,14 @@
     android:orientation="vertical"
     android:background="@color/woney_white"
     android:fitsSystemWindows="true"
-    android:weightSum="7">
+    android:weightSum="7.2">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:layout_marginTop="17dp"
         android:layout_marginBottom="5dp"
-        android:gravity="center_vertical"
         android:text="@string/dialog_countdown_top"
         android:textSize="@dimen/woney_textsize_17_5"
         android:textColor="@color/woney_black"

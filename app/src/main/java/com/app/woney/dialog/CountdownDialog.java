@@ -44,7 +44,7 @@ public class CountdownDialog extends AppCompatActivity {
         public void run() {
             Date nowTime = new Date();
             if (endTime.after(nowTime)) {
-                Log.d("FB Share Time", endTime + " vs " + nowTime);
+                //Log.d("FB Share Time", endTime + " vs " + nowTime);
 
                 Long diff = endTime.getTime() - nowTime.getTime();
 
