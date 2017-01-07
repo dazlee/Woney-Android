@@ -87,4 +87,13 @@ public class OngoingData extends CoreData {
             return false;
         }
     }
+
+    public static String getDefaultNextDraw() {
+        return WoneyKey.getStringFormated(R.string.earn_top_draw, "--", "--");
+    }
+
+    public static String getDefaultReward() {
+        DecimalFormat mDecimalFormat = new DecimalFormat("#,###");
+        return mDecimalFormat.format((double) 0);
+    }
 }

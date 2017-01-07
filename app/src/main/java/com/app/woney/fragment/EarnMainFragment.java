@@ -1,29 +1,23 @@
 package com.app.woney.fragment;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.woney.R;
+import com.app.woney.activity.MainActivity;
+import com.app.woney.data.OngoingData;
 import com.app.woney.listener.TapjoyVideoListener;
 import com.app.woney.listener.TapjoyWallListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.app.woney.R;
-import com.app.woney.activity.MainActivity;
-import com.app.woney.data.OngoingData;
-import com.tapjoy.Tapjoy;
 
 public class EarnMainFragment extends Fragment {
 
@@ -91,6 +85,9 @@ public class EarnMainFragment extends Fragment {
         if (ongoingData != null) {
             topPrice.setText(ongoingData.getFormatReward());
             nextDraw.setText(ongoingData.getFormatNextDraw());
+        } else {
+            topPrice.setText(OngoingData.getDefaultReward());
+            nextDraw.setText(OngoingData.getDefaultNextDraw());
         }
     }
 
@@ -164,8 +161,8 @@ public class EarnMainFragment extends Fragment {
 
     public void setupAd(View view) {
         adView = (AdView) view.findViewById(R.id.earn_ad_view);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("F4ABFC734A9A0D1CBE419F3E2A2D97D2").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+                //.addTestDevice("F4ABFC734A9A0D1CBE419F3E2A2D97D2").build();
         adView.loadAd(adRequest);
     }
 }
