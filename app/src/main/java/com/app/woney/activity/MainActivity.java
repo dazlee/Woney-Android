@@ -375,19 +375,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickDailyEarn(View view) throws Exception {
-        if (woneyUser.canEarnDaylyToday()) {
-            if (woneyUser.isFbLogin()) {
-                Log.d("DailyEarn", "Earn : " + WoneyKey.EARN_DAILY);
-                UserGainReq gainReq = new UserGainReq(woneyUser, WoneyKey.EARN_DAILY, true, false);
-                RestClient restClient = new RestClient(gainReq);
-                restClient.execute();
+        if (woneyUser.isFbLogin()) {
+            if (woneyUser.canEarnDaylyToday()) {
+                if (woneyUser.isFbLogin()) {
+                    Log.d("DailyEarn", "Earn : " + WoneyKey.EARN_DAILY);
+                    UserGainReq gainReq = new UserGainReq(woneyUser, WoneyKey.EARN_DAILY, true, false);
+                    RestClient restClient = new RestClient(gainReq);
+                    restClient.execute();
+                } else {
+                    woneyUser.setOfflineWoney(woneyUser.getOfflineWoney() + WoneyKey.EARN_DAILY);
+                    setupWoneyCreditView();
+                }
+                askGainDialog(WoneyKey.EARN_DAILY);
             } else {
-                woneyUser.setOfflineWoney(woneyUser.getOfflineWoney() + WoneyKey.EARN_DAILY);
-                setupWoneyCreditView();
+                startActivity(new Intent(MainActivity.this, BackgainDialog.class));
             }
-            askGainDialog(WoneyKey.EARN_DAILY);
         } else {
-            startActivity(new Intent(MainActivity.this, BackgainDialog.class));
+            fbLogin(view);
         }
     }
 
