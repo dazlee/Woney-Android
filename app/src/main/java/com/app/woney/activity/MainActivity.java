@@ -367,7 +367,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             } else {
-                // TODO
                 startActivity(new Intent(MainActivity.this, CountdownDialog.class));
             }
         } else {
