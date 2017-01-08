@@ -42,7 +42,7 @@ public class OngoingData extends CoreData {
     public String getFormatReward() {
         Integer reward = getReward();
         DecimalFormat mDecimalFormat = new DecimalFormat("#,###");
-        return mDecimalFormat.format((double) reward);
+        return "$" + mDecimalFormat.format((double) reward);
     }
 
     public Date getEndTime() {
@@ -94,6 +94,6 @@ public class OngoingData extends CoreData {
 
     public static String getDefaultReward() {
         DecimalFormat mDecimalFormat = new DecimalFormat("#,###");
-        return mDecimalFormat.format((double) 0);
+        return "$" + mDecimalFormat.format((double) 0);
     }
 }
