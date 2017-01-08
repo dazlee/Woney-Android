@@ -9,30 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.tapjoy.TJEarnedCurrencyListener;
-import com.tapjoy.TJGetCurrencyBalanceListener;
-import com.tapjoy.TJPlacement;
-import com.tapjoy.Tapjoy;
 import com.app.woney.R;
 import com.app.woney.adpt.ViewPagerAdapter;
 import com.app.woney.data.OngoingData;
@@ -56,6 +36,25 @@ import com.app.woney.util.RestClient;
 import com.app.woney.util.SystemUtil;
 import com.app.woney.util.TapjoyUtil;
 import com.app.woney.view.WoneyViewPager;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.tapjoy.TJEarnedCurrencyListener;
+import com.tapjoy.TJGetCurrencyBalanceListener;
+import com.tapjoy.TJPlacement;
+import com.tapjoy.Tapjoy;
 
 import java.util.Date;
 
@@ -174,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
                         FacebookReq.loadFbData(accessToken, true);
                     }
                 };
+            } else {
+                FacebookReq.loadFbData(accessToken, true);
             }
         }
 
