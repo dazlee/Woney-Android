@@ -408,7 +408,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickHistory(View view) {
-        clickFanpage(view);
+        Intent intent = new Intent(MainActivity.this, WebActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(WoneyKey.WEB_URL_KEY, WoneyKey.HISTORY_URL);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public static void requestNewInterstitial() {

@@ -23,6 +23,8 @@ public class WoneyKey {
 
     public static final String PLAY_URL = "https://play.google.com/store/apps/details?id=com.app.woney";
 
+    public static final String HISTORY_URL = "https://www.facebook.com/pg/woneyglobe/photos/?tab=album&album_id=197112090762458";
+
     public static final String FB_FAN_PAGE = "https://www.facebook.com/woneyglobe";
     public static final String FB_FAN_PAGE_ID = "176487632824904";
 
@@ -51,6 +53,7 @@ public class WoneyKey {
 
     public static final String GAIN_KEY = "gainKey";
     public static final String TEXT_KEY = "SHOW_KEY";
+    public static final String WEB_URL_KEY = "WEB_URL_KEY";
 
     public static void initRes(Context context) {
         WoneyKey.context = context;
