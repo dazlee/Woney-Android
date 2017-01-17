@@ -18,7 +18,7 @@ public class SyncDrawTask extends TimerTask {
 
     @Override
     public void run() {
-        RestClient restClient = new RestClient(new UserBetReq(MainActivity.getUser()));
+        RestClient restClient = new RestClient(new UserBetReq(MainActivity.getUser().getAccessHeaderMap()));
         restClient.execute();
     }
 }

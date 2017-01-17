@@ -16,16 +16,14 @@ import org.json.JSONObject;
 
 public class SingUpReq extends HttpReq {
 
-    private UserData userData;
-
-    public SingUpReq(UserData userData) {
-        super(WoneyKey.API_SINGUP, WoneyKey.NET_METHOD_POST, userData.getUserReq());
-        this.userData = userData;
+    public SingUpReq(JSONObject reqJson) {
+        super(WoneyKey.API_SINGUP, WoneyKey.NET_METHOD_POST, reqJson);
     }
 
     @Override
     public void onFinished(JSONObject jsonObject) {
         Log.d("HTTP", jsonObject.toString());
+        UserData userData = MainActivity.getUser();
 
         Integer offlineGain = userData.getOfflineWoney();
 
@@ -35,7 +33,7 @@ public class SingUpReq extends HttpReq {
         EarnMainFragment.setupBetsBtn();
 
         if (offlineGain != null && offlineGain != 0) {
-            UserGainReq gainReq = new UserGainReq(userData, offlineGain);
+            UserGainReq gainReq = new UserGainReq(userData.getAccessHeaderMap(), offlineGain);
             RestClient restClient = new RestClient(gainReq);
             restClient.execute();
 

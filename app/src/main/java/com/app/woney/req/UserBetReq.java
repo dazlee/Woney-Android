@@ -9,15 +9,17 @@ import com.app.woney.fragment.EarnMainFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 /**
  * Created by houan on 2016/12/6.
  */
 
 public class UserBetReq extends HttpReq {
 
-    public UserBetReq(UserData userData) {
+    public UserBetReq(Map<String, String> accessMap) {
         super(WoneyKey.API_USE_ME_BET, WoneyKey.NET_METHOD_POST,
-                userData.getAccessHeaderMap(), getReqJson());
+                accessMap, getReqJson());
     }
 
     @Override

@@ -16,16 +16,14 @@ import org.json.JSONObject;
 
 public class UserMeReq extends HttpReq {
 
-    private UserData userData;
-
     public UserMeReq(UserData userData) {
         super(WoneyKey.API_USE_ME, WoneyKey.NET_METHOD_GET, userData.getAccessHeaderMap());
-        this.userData = userData;
     }
 
     @Override
     public void onFinished(JSONObject jsonObject) {
         Log.d("HTTP", jsonObject.toString());
+        UserData userData = MainActivity.getUser();
 
         if (jsonObject.length() != 0) {
             userData.updateWoneyDataByJson(jsonObject);
@@ -40,7 +38,7 @@ public class UserMeReq extends HttpReq {
     public void onError() {
         // try signup again
         UserData userData = MainActivity.getUser();
-        RestClient restClient = new RestClient(new SingUpReq(userData));
+        RestClient restClient = new RestClient(new SingUpReq(userData.getUserReq()));
         restClient.execute();
     }
 }

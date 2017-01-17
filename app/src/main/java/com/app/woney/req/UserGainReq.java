@@ -9,6 +9,8 @@ import com.app.woney.data.WoneyKey;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 /**
  * Created by houan on 2016/12/6.
  */
@@ -17,13 +19,13 @@ public class UserGainReq extends HttpReq {
 
     private int gainWoney;
 
-    public UserGainReq(UserData userData, Integer gainWoney) {
-        this(userData, gainWoney, false, false);
+    public UserGainReq(Map<String, String> accessMap, Integer gainWoney) {
+        this(accessMap, gainWoney, false, false);
     }
 
-    public UserGainReq(UserData userData, Integer gainWoney, boolean isDailyEarn, boolean isFbShare) {
+    public UserGainReq(Map<String, String> accessMap, Integer gainWoney, boolean isDailyEarn, boolean isFbShare) {
         super(WoneyKey.API_USE_ME_GAIN, WoneyKey.NET_METHOD_POST,
-                userData.getAccessHeaderMap(), getReqJson(gainWoney, isDailyEarn, isFbShare));
+                accessMap, getReqJson(gainWoney, isDailyEarn, isFbShare));
         this.gainWoney = gainWoney;
     }
 
@@ -34,12 +36,11 @@ public class UserGainReq extends HttpReq {
 
         try {
             Integer retWoney = jsonObject.getInt(WoneyKey.getWoneyKey());
-            if (userData.getWoney() + gainWoney == retWoney) {
-                userData.gainWoney(gainWoney);
-            } else {
+            if (userData.getWoney() + gainWoney != retWoney) {
+                // TODO Maybe will error?
                 Log.e("Gain", "Woney isn't match between local and response.");
             }
-
+            userData.gainWoney(gainWoney);
             MainActivity.setupWoneyCreditView();
         } catch (JSONException e) {
             e.printStackTrace();

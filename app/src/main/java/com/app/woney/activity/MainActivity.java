@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         Tapjoy.onActivityStart(this);
         setupTapjoy();
-        setupWoneyCreditView();
+        refreshCreditsView();
         loadOnGoing();
         loadLastDraw();
     }
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("FB", "Post success");
 
             Log.d("GainReq", "FB Share, Earn: " + WoneyKey.EARN_FB_SHARE);
-            UserGainReq req = new UserGainReq(woneyUser, WoneyKey.EARN_FB_SHARE, false, true);
+            UserGainReq req = new UserGainReq(woneyUser.getAccessHeaderMap(), WoneyKey.EARN_FB_SHARE, false, true);
             RestClient restClient = new RestClient(req);
             restClient.execute();
             askGainDialog(WoneyKey.EARN_FB_SHARE);
@@ -231,21 +231,13 @@ public class MainActivity extends AppCompatActivity {
             public void onEarnedCurrency(String currencyName, int amount) {
                 Log.d("Tapjoy", "Currency name: " + currencyName + ", " + "Balance: " + amount);
 
-                UserData user = MainActivity.getUser();
-                if (user.isFbLogin()) {
-                    UserGainReq req = new UserGainReq(user, amount);
+                if (woneyUser.isFbLogin()) {
+                    UserGainReq req = new UserGainReq(woneyUser.getAccessHeaderMap(), amount);
                     RestClient restClient = new RestClient(req);
                     restClient.execute();
                 } else {
-                    user.setOfflineWoney(user.getOfflineWoney() + amount);
-
-                    // update setupWoneyCreditView
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            setupWoneyCreditView();
-                        }
-                    });
+                    woneyUser.setOfflineWoney(woneyUser.getOfflineWoney() + amount);
+                    refreshCreditsView();
                 }
 
                 askGainDialog(amount);
@@ -379,12 +371,12 @@ public class MainActivity extends AppCompatActivity {
             if (woneyUser.canEarnDaylyToday()) {
                 if (woneyUser.isFbLogin()) {
                     Log.d("DailyEarn", "Earn : " + WoneyKey.EARN_DAILY);
-                    UserGainReq gainReq = new UserGainReq(woneyUser, WoneyKey.EARN_DAILY, true, false);
+                    UserGainReq gainReq = new UserGainReq(woneyUser.getAccessHeaderMap(), WoneyKey.EARN_DAILY, true, false);
                     RestClient restClient = new RestClient(gainReq);
                     restClient.execute();
                 } else {
                     woneyUser.setOfflineWoney(woneyUser.getOfflineWoney() + WoneyKey.EARN_DAILY);
-                    setupWoneyCreditView();
+                    refreshCreditsView();
                 }
                 askGainDialog(WoneyKey.EARN_DAILY);
             } else {
@@ -458,19 +450,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void refreshCreditsView() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setupWoneyCreditView();
+            }
+        });
+    }
+
     public static void setupWoneyCreditView() {
         Integer woney = 0;
-        if (getUser().isFbLogin() && getUser().getUserAccessToken() != null) {
-            if (getUser() != null && getUser().getWoney() !=null) {
-                woney = getUser().getWoney();
-            }
-        } else {
-            if (getUser() != null && getUser().getOfflineWoney() !=null) {
-                woney = getUser().getOfflineWoney();
+        if (woneyUser != null) {
+            if (woneyUser.isFbLogin() && woneyUser.getUserAccessToken() != null) {
+                if (woneyUser.getWoney() != null) {
+                    woney = woneyUser.getWoney();
+                }
+            } else {
+                if (woneyUser.getOfflineWoney() != null) {
+                    woney = woneyUser.getOfflineWoney();
+                }
             }
         }
+        setupWoneyWithCredit(woney);
+    }
 
-        creditWoney.setText(WoneyKey.getStringFormated(R.string.woney_credits, woney));
+    public static void setupWoneyWithCredit(Integer credits) {
+        creditWoney.setText(WoneyKey.getStringFormated(R.string.woney_credits, credits));
     }
 
     private void askGainDialog(Integer gain) {

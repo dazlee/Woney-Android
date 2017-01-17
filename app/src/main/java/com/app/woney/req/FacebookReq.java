@@ -39,7 +39,7 @@ public class FacebookReq {
                         userData.updateByReqCb(id, email, gender);
 
                         if (isSingUp || userData.getUserAccessToken() == null) {
-                            RestClient restClient = new RestClient(new SingUpReq(userData));
+                            RestClient restClient = new RestClient(new SingUpReq(userData.getUserReq()));
                             restClient.execute();
                         } else {
                             RestClient restClient = new RestClient(new UserMeReq(userData));
