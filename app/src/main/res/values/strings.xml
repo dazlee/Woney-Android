@@ -97,7 +97,7 @@
     <string name="title_activity_facebook">FacebookActivity</string>
 
     <string name="main_tab_key">tag_key</string>
-    <string name="main_tab_main">Earn/Play</string>
+    <string name="main_tab_main">Home</string>
     <string name="main_tab_winner">Winner</string>
     <string name="main_tab_setting">Setting</string>
     <string name="title_activity_tour">TourActivity</string>
@@ -105,9 +105,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="earn_top_paypal">Estimate top prize:</string>
-    <string name="earn_top_draw">Next game in %1$d days %2$d hrs</string>
-    <string name="earn_top_btn_luk">Play: %1$d</string>
-    <string name="earn_top_woneybet">10 Woney \n/ play</string>
+    <string name="earn_top_draw">This week\'s game will end in %1$d days %2$d hrs</string>
+    <string name="earn_top_btn_luk">Click to get ticket</string>
+    <string name="earn_top_btn_luk_comment">(you got %1$d tickets now)</string>
+    <string name="earn_top_woneybet">Tips: 10 Woney credits to join, the more tickets you got, the higher chance you win.</string>
 
     <string name="earn_offer_wall">OFFER WALL</string>
     <string name="earn_offer_wall_credits">+1~100 credits</string>
@@ -120,7 +121,8 @@
     <string name="earn_daily_earn_credits">+1 credits</string>
 
     <string name="winner_winner">%1$s Top prize winner:</string>
-    <string name="winner_sec_price">Second prize: %1$d /each</string>
+    <string name="winner_top_price">$%1$d</string>
+    <string name="winner_sec_price">Second prize: $%1$d /each</string>
     <string name="winner_history">History</string>
     <string name="winner_buttom_msg">We will inform the winner via facebook messenger.</string>
 

@@ -15,6 +15,9 @@
 
     <dimen name="woney_textsize_10">10sp</dimen>
     <dimen name="woney_textsize_12_5">12.5sp</dimen>
+    <dimen name="woney_textsize_14">14sp</dimen>
+    <dimen name="woney_textsize_15">15sp</dimen>
+    <dimen name="woney_textsize_16">16sp</dimen>
     <dimen name="woney_textsize_17_5">17.5sp</dimen>
     <dimen name="woney_textsize_20">20sp</dimen>
     <dimen name="woney_textsize_32_5">32.5sp</dimen>

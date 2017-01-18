@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:layout_gravity="left"
             android:gravity="bottom|center_horizontal"
-            android:layout_marginLeft="85dp"
+            android:layout_marginLeft="16dp"
             android:textSize="@dimen/woney_textsize_17_5"
             />
 
@@ -41,10 +41,10 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_gravity="left"
-            android:layout_marginLeft="85dp"
+            android:layout_marginLeft="16dp"
             android:gravity="center_vertical"
             android:textSize="@dimen/woney_textsize_12_5"
-            android:textColor="@color/woney_black"
+            android:textColor="@color/woney_white"
             />
 
         <LinearLayout
@@ -52,26 +52,40 @@
             android:layout_height="0dp"
             android:layout_weight="1.5"
             android:orientation="horizontal"
-            android:layout_marginLeft="85dp"
+            android:layout_marginLeft="16dp"
             >
 
-            <Button
+
+            <LinearLayout
                 android:id="@+id/earn_bet_btn"
-                android:text="@string/earn_top_btn_luk"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:textColor="@color/woney_black"
                 android:background="@drawable/btn_luckydraw"
                 android:onClick="clickDraw"
-                />
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/woney_black"
+                    android:textSize="@dimen/woney_textsize_15"
+                    android:text="@string/earn_top_btn_luk"/>
+                <TextView
+                    android:id="@+id/earn_bet_btn_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/woney_black"
+                    android:textSize="@dimen/woney_textsize_10"
+                    android:text="@string/earn_top_btn_luk_comment"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/earn_top_woneybet"
                 android:text="@string/earn_top_woneybet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left"
+                android:layout_gravity="top|left"
                 android:layout_marginLeft="@dimen/woney_margin_8"
                 android:textSize="@dimen/woney_textsize_10"
                 android:textColor="@color/woney_black"

@@ -93,7 +93,7 @@ public class EarnWinnerFragment extends Fragment {
             UserData firstUser = lastDrawData.getFirstWinner();
             topPrize.setText(lastDrawData.getFormatedTopText());
 
-            firstReward.setText(String.valueOf(lastDrawData.getReward()));
+            firstReward.setText(lastDrawData.getFormatedTopReward());
             secReward.setText(lastDrawData.getFormatedSecReward());
 
             firstWinName.setText(firstUser.getShowName());

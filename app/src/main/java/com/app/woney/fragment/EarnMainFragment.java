@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.woney.R;
@@ -23,7 +24,8 @@ public class EarnMainFragment extends Fragment {
 
     private static TextView topPrice;
     private static TextView nextDraw;
-    private static Button luckyDraw;
+    private static LinearLayout luckyDraw;
+    private static TextView luckyDrawComment;
 
     private static TextView earnOfferWallCredit;
     private static TextView earnOfferWallStatus;
@@ -66,7 +68,8 @@ public class EarnMainFragment extends Fragment {
     private void setupView(View view) {
         topPrice = (TextView) view.findViewById(R.id.earn_top_price);
         nextDraw = (TextView) view.findViewById(R.id.earn_top_draw);
-        luckyDraw = (Button) view.findViewById(R.id.earn_bet_btn);
+        luckyDraw = (LinearLayout) view.findViewById(R.id.earn_bet_btn);
+        luckyDrawComment = (TextView) view.findViewById(R.id.earn_bet_btn_comment);
 
         earnOfferWallCredit = (TextView) view.findViewById(R.id.earn_offer_wall_credits);
         earnOfferWallStatus = (TextView) view.findViewById(R.id.earn_offer_wall_status);
@@ -156,7 +159,7 @@ public class EarnMainFragment extends Fragment {
         if (MainActivity.getUser() != null) {
             bets = MainActivity.getUser().getFormatLukDraw();
         }
-        luckyDraw.setText(bets);
+        luckyDrawComment.setText(bets);
     }
 
     public void setupAd(View view) {

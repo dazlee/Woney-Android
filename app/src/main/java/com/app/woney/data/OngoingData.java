@@ -89,7 +89,7 @@ public class OngoingData extends CoreData {
     }
 
     public static String getDefaultNextDraw() {
-        return "Next game in -- days -- hrs";//WoneyKey.getStringFormated(R.string.earn_top_draw, "--", "--");
+        return "This week's game will end in -- days -- hrs";//WoneyKey.getStringFormated(R.string.earn_top_draw, "--", "--");
     }
 
     public static String getDefaultReward() {

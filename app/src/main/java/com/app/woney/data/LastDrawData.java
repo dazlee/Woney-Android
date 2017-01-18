@@ -85,6 +85,9 @@ public class LastDrawData extends OngoingData {
         return WoneyKey.getStringFormated(R.string.winner_winner, dateStr);
     }
 
+    public String getFormatedTopReward() {
+        return WoneyKey.getStringFormated(R.string.winner_top_price, getReward());
+    }
     public String getFormatedSecReward() {
         return WoneyKey.getStringFormated(R.string.winner_sec_price, getSecReward());
     }

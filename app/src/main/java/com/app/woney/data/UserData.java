@@ -220,7 +220,7 @@ public class UserData extends CoreData {
             bets = 0;
             // TODO
         }
-        return WoneyKey.getStringFormated(R.string.earn_top_btn_luk, bets);
+        return WoneyKey.getStringFormated(R.string.earn_top_btn_luk_comment, bets);
     }
 
     public boolean isEnoughDraw() {
