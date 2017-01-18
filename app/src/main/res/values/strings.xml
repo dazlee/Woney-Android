@@ -83,12 +83,13 @@
     <string name="api_first_winner">firstWinner</string>
     <string name="api_common_winners">commonWinners</string>
 
-    <string name="tour_page_1_title">Join Woney.</string>
-    <string name="tour_page_1">Play for free.</string>
-    <string name="tour_page_2_title">Earn Woney credits to play.</string>
-    <string name="tour_page_2">It\'s fun and easy.</string>
-    <string name="tour_page_3_title">Each game complete weekly.</string>
-    <string name="tour_page_3">You may win BIG.</string>
+    <string name="tour_page_1_title">Join Woney</string>
+    <string name="tour_page_1">Play for free</string>
+    <string name="tour_page_2_title">Earn Woney credits to play</string>
+    <string name="tour_page_2">It\'s fun and easy</string>
+    <string name="tour_page_3_title">Each game complete weekly</string>
+    <string name="tour_page_3">You may win BIG</string>
+    <string name="tour_swipe_left">&lt; Swipe Left</string>
     <string name="tour_btn_start">Start</string>
 
     <string name="woney_credits">Woney Credits：%1$s</string>

@@ -28,8 +28,6 @@ public class TourActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.CirclePageindicator);
-        circlePageIndicator.setViewPager(mViewPager);
     }
 
     private void initView() {
