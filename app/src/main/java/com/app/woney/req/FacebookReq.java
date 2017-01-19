@@ -27,27 +27,29 @@ public class FacebookReq {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         //讀出姓名 ID FB個人頁面連結
-                        String id = object.optString("id");
-                        String email = object.optString("email");
-                        String gender = object.optString("gender");
-                        Log.d("FB", "complete");
-                        Log.d("FB", id);
-                        Log.d("FB", email);
-                        Log.d("FB", gender);
+                        if (object != null) {
+                            String id = object.optString("id");
+                            String email = object.optString("email");
+                            String gender = object.optString("gender");
+                            Log.d("FB", "complete");
+                            Log.d("FB", id);
+                            Log.d("FB", email);
+                            Log.d("FB", gender);
 
-                        UserData userData = MainActivity.getUser();
-                        userData.updateByReqCb(id, email, gender);
+                            UserData userData = MainActivity.getUser();
+                            userData.updateByReqCb(id, email, gender);
 
-                        if (isSingUp || userData.getUserAccessToken() == null) {
-                            RestClient restClient = new RestClient(new SingUpReq(userData.getUserReq()));
-                            restClient.execute();
-                        } else {
-                            RestClient restClient = new RestClient(new UserMeReq(userData));
-                            restClient.execute();
+                            if (isSingUp || userData.getUserAccessToken() == null) {
+                                RestClient restClient = new RestClient(new SingUpReq(userData.getUserReq()));
+                                restClient.execute();
+                            } else {
+                                RestClient restClient = new RestClient(new UserMeReq(userData));
+                                restClient.execute();
+                            }
+
+                            userData.finishLoadFb();
+                            EarnSettingFragment.setupFbLoginView();
                         }
-
-                        userData.finishLoadFb();
-                        EarnSettingFragment.setupFbLoginView();
                     }
                 });
 
